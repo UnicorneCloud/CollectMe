@@ -1,29 +1,27 @@
 {
   "expo": {
-    "name": "CollectMe",
-    "slug": "CollectMe",
-    "privacy": "public",
-    "sdkVersion": "32.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "sdkVersion": "28.0.0",
+    "icon": "./assets/DefaultIcon.png",
+    "slug": "strapflatapp",
     "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "image": "./assets/LaunchImages/splash-screen.png"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "packagerOpts": {
+      "assetExts": ["ttf"]
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "io.market.nativebase.geekyants.flatappui"
+    },
+    "android": {
+      "package": "io.market.nativebase.geekyants.flatappui"
+    },
+    "androidStatusBarColor": "#01cca1",
+    "androidStatusBar": {
+      "barStyle": "dark-content",
+      "backgroundColor": "#01cca1"
     }
   }
 }

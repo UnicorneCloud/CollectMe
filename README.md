@@ -1,6 +1,15 @@
-# HackQC 2019
+## React Native Flat App Theme v9.0.0 - CRNA
 
-Règlements : https://hackqc.ca/reglements/  
-Critère d'évaluation : https://hackqc.ca/critere-devaluations/
+Thanks for purchasing the React Native Flat App Theme.
 
-Brainstorm : https://docs.google.com/document/d/1-2g8ZHGF0GdtpEk67KIGEedw7BXstnwVJ_eTTa0CXAU/edit?usp=sharing
+This is an Expo app with CRNA and react-navigation.
+
+Follow the documentation to install and get started with the development:
+
+-   [Documentation](http://docs.market.nativebase.io/react-native-flat-app-ui/)
+-   [Product Page](https://market.nativebase.io/view/react-native-flat-app-theme)
+-	[Change Log](http://gitstrap.com/strapmobile/FlatApp/blob/v9.0.0/CRNA/ChangeLog.md)
+
+Please do check `FAQs` section in docs for queries.
+
+Happy coding!
