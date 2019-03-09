@@ -1,0 +1,36 @@
+[
+	{
+		"id": 0,
+		"dates": {
+			"2019-03-17": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": true,
+				"endingDay": true
+			}
+		},
+		"headline": "Journée Normand Maurice",
+		"time": "17 mars",
+		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/normand.png"
+	},
+	{
+		"id": 1,
+		"dates": {
+			"2019-03-23": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": true,
+				"endingDay": false
+			},
+			"2019-03-24": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": true
+			}
+		},
+		"headline": "La fin de semaine zéro déchet",
+		"time": "23-24 mars",
+		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/zero.png"
+	}
+]
