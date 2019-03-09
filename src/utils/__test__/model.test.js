@@ -30,7 +30,7 @@ describe('upcomingCollectDates', () => {
   it('should not crash', () => {
     const collectSchedule = {
       startDate: new Date(2019, 3, 9),
-      days: new Set([0, 1, 2]),
+      daysInt: [0, 1, 2],
       period: 2
     }
     const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
@@ -42,11 +42,11 @@ describe('getUpcomingCollectDates', () => {
   it('should not crash', () => {
     const collectSchedule = {
       startDate: new Date(2019, 3, 9),
-      days: new Set([0, 1, 2]),
+      daysInt: [0, 1, 2],
       period: 2
     }
-    const result = getUpcomingCollectDates(collectSchedule, 5)
+    const result = getUpcomingCollectDates(collectSchedule, 14)
     console.log(result)
-    expect(result).toHaveLength(5)
+    expect(result).toHaveLength(14)
   })
 })

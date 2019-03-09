@@ -90,11 +90,11 @@ export function* upcomingCollectDates (collectSchedule) {
   let nextCollectDay = now.add(weeksUntilNextCollect, 'week').set('day', 0)
 
   while(true){
-    for(const day of collectSchedule.days){
+    for(const day in collectSchedule.daysInt){
       nextCollectDay = nextCollectDay.set('day', day)
       yield nextCollectDay
     }
-    nextCollectDay.add(collectSchedule.period, 'week')
+    nextCollectDay = nextCollectDay.add(collectSchedule.period, 'week')
   }
 }
 
