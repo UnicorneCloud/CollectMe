@@ -64,7 +64,6 @@ class MapScreen extends React.Component {
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`
     });
-    console.log(url);
     Linking.openURL(url);
   };
   openFilter = () => {
