@@ -62,8 +62,8 @@ class Walkthrough extends Component {
                           ? styles.apaginationText
                           : styles.iospaginationText
                       } >
-                      <MaterialCommunityIcons name="leaf" size={22} color="#FFF" />
-                      <Text> Astuce verte!</Text>
+                      <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
+                      <Text style={styles.titleText}> Astuce verte!</Text>
                     </Text>
                     <Icon name="md-bulb" style={styles.imageIcons} />
                     <Text
