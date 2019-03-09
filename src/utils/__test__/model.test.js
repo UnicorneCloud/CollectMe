@@ -1,7 +1,7 @@
-import {DAYS_OF_THE_WEEK, createFrequence} from '../model';
+import {WEEK_DAYS, createFrequence} from '../model';
 
 const EXPECTED_FREQUENCE = new Map([
-  ["days", new Set(DAYS_OF_THE_WEEK)],
+  ["days", new Set(WEEK_DAYS)],
   ["period", 1]
 ]);
 
@@ -9,7 +9,7 @@ let myFrequence;
 
 describe("When creating the frequence", () => {
   beforeEach(() => {
-    myFrequence = createFrequence(DAYS_OF_THE_WEEK, 1);
+    myFrequence = createFrequence(WEEK_DAYS, 1);
   });
 
   it("should by a set for 'days'", () => {
