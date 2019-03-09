@@ -36,7 +36,7 @@ class Walkthrough extends Component {
 
   render() {
     const tipsTemp = this.props.tips
-    const tips = [tipsTemp[getRandomInt(0, tipsTemp.length)]]
+    const tips = [tipsTemp[getRandomInt(0, tipsTemp.length-1)]]
 
     return (
       <Container>
