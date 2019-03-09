@@ -50,19 +50,17 @@ class MapScreen extends React.Component {
         </Body>
         <Right />
       </Header>
-      <Content showsVerticalScrollIndicator={false} style={{ backgroundColor: "#fff" }} >
-        <View>
-<MapView
-  style={styles.map}
+        <View style={{flex:1, backgroundColor: 'powderblue'}}>
+ <MapView
+ style={styles.map}
     initialRegion={{
       latitude: latitude,
       longitude: longitude,
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     }}
-  />
+  /> 
   </View>
-  </Content>
   </Container>
     )
   }
