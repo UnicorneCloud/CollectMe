@@ -12,6 +12,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 
 import { Permissions, Notifications } from 'expo'
+import { askLocationPermission } from '../../actions/location';
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -87,6 +88,13 @@ class Walkthrough extends Component {
   }
   
   componentDidMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this.props.askLocationPermission();
+    }
     registerForPushNotificationsAsync()
   }
 
@@ -150,7 +158,8 @@ class Walkthrough extends Component {
 
 function bindAction(dispatch) {
   return {
-    fetchData: url => dispatch(tipsFetch(url))
+    fetchData: url => dispatch(tipsFetch(url)),
+    askLocationPermission: () => dispatch(askLocationPermission()),
   };
 }
 
