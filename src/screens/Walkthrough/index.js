@@ -11,7 +11,7 @@ import styles from "./styles";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 
-import { Permissions, Notifications } from 'expo'
+import { Permissions, Notifications,Constants } from 'expo'
 import { askLocationPermission } from '../../actions/location';
 
 const deviceHeight = Dimensions.get("window").height;
