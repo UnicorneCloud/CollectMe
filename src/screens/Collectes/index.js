@@ -21,6 +21,62 @@ class Collectes extends Component {
     const { navigation, allCollectSchedules: { data: collectSchedules } } = this.props
     console.log(collectSchedules)
 
+
+    const getNext14DaysCollect = (schedule) => {
+      const nextCollects = [];
+
+      const currentDay = dayjs().day();
+      console.log("currentDay", currentDay)
+
+      const targetDay = 5;
+
+      let nextCollect = dayjs().set('day', targetDay)
+
+      console.log("nextCollect-before", nextCollect.format("YYYY-MM-DD"))
+
+      if (targetDay < currentDay) {
+        nextCollect = nextCollect.add(1, 'week')
+      }
+      nextCollects.push(nextCollect);
+
+      if (schedule.period === 1) {
+
+      }
+
+      return nextCollects;
+    }
+
+    const nextCollects = [
+      {
+        "collectType": "Garbage",
+        "collectPeriod": 1,
+        "collectDate": dayjs()
+      },
+      {
+        "collectType": "Garbage",
+        "collectPeriod": 1,
+        "collectDate": dayjs()
+      },
+      {
+        "collectType": "Recycling",
+        "collectPeriod": 2,
+        "collectDate": dayjs()
+      }
+    ];
+
+    // for (var scheduleType in collectSchedules) {
+    //   console.log("scheduleType", scheduleType)
+
+    //   const schedule = collectSchedules[scheduleType]
+    //   console.log("schedule", schedule)
+
+    //   const nextCollectForSpecificType = getNext14DaysCollect(schedule);
+
+    //   console.log("==========================")
+    //   console.log("nextCollectForSpecificType", nextCollectForSpecificType)
+    // }
+
+
     return (
       <Container style={styles.bg}>
         <CustomHeader hasTabs={true} navigation={navigation} />
@@ -31,76 +87,50 @@ class Collectes extends Component {
 
         <Content showsVerticalScrollIndicator={false}>
 
-          <View>
-            <View style={styles.timelineView}>
-              <View style={styles.timelineContent}>
-                <Text />
+          {nextCollects.map(collect =>
+            <View>
+              <View style={styles.timelineView}>
+                <View style={styles.timelineContent}>
+                  <Text />
+                </View>
+              </View>
+              <View style={styles.contentContainer}>
+                <Grid>
+                  <Col style={{ flexDirection: "row" }}>
+                    {
+                      collect.collectType == "Garbage" ?
+                        <Icon
+                          name="ios-trash"
+                          style={{ color: "#999", marginLeft: 2 }}
+                        /> :
+                        <FontAwesome
+                          name="recycle"
+                          style={styles.timelineIcon}
+                        />
+                    }
+                    <View style={{ paddingLeft: 15 }}>
+                      <Text style={styles.timelineContentHeading}>
+                        {`Collectes ${collect.collectType == "Garbage" ? "des déchets" : " du recyclage"}`}
+                      </Text>
+                    </View>
+                  </Col>
+                  <Col>
+                    <View style={styles.newsTypeView}>
+                      <Icon name="ios-time-outline" style={styles.timeIcon} />
+                      <Text style={styles.time}>{collect.collectDate.format('D MMM')}</Text>
+                    </View>
+                  </Col>
+                </Grid>
+              </View>
+              <View style={styles.timelineView}>
+                <View style={styles.timelineContent}>
+                  <Text style={styles.timelineTextHeader}>
+                    {`Toutes les ${collect.collectPeriod > 1 ? `${collect.collectPeriod} ` : ""}semaines`}
+                  </Text>
+                </View>
               </View>
             </View>
-
-            <View style={styles.contentContainer}>
-              <Grid>
-                <Col style={{ flexDirection: "row" }}>
-                  <Icon
-                    name="ios-trash"
-                    style={{ color: "#999", marginLeft: 2 }}
-                  />
-                  <View style={{ paddingLeft: 15 }}>
-                    <Text style={styles.timelineContentHeading}>
-                      Collectes des déchets
-                    </Text>
-                  </View>
-                </Col>
-                <Col>
-                  <View style={styles.newsTypeView}>
-                    <Icon name="ios-time-outline" style={styles.timeIcon} />
-                    <Text style={styles.time}>{dayjs().format('D MMM')}</Text>
-                  </View>
-                </Col>
-              </Grid>
-            </View>
-            <View style={styles.timelineView}>
-              <View style={styles.timelineContent}>
-                <Text style={styles.timelineTextHeader}>
-                  Toutes les semaines
-                </Text>
-              </View>
-            </View>
-          </View>
-
-          <View>
-            <View style={styles.timelineView}>
-              <View style={styles.timelineContent}>
-                <Text />
-              </View>
-            </View>
-            <View style={styles.contentContainer}>
-              <Grid>
-                <Col style={{ flexDirection: "row" }}>
-                  <FontAwesome
-                    name="recycle"
-                    style={styles.timelineIcon}
-                  />
-                  <View style={{ paddingLeft: 10 }}>
-                    <Text style={styles.timelineContentHeading}>Collecte du recyclage</Text>
-                  </View>
-                </Col>
-                <Col>
-                  <View style={styles.newsTypeView}>
-                    <Icon name="ios-time-outline" style={styles.timeIcon} />
-                    <Text style={styles.time}>{dayjs().format('D MMM')}</Text>
-                  </View>
-                </Col>
-              </Grid>
-            </View>
-            <View style={styles.timelineView}>
-              <View style={styles.timelineContent}>
-                <Text style={styles.timelineTextHeader}>
-                  Toutes les 2 semaines
-                </Text>
-              </View>
-            </View>
-          </View>
+          )}
 
         </Content>
       </Container>

@@ -14,6 +14,9 @@ import {
   ActivityIndicator
 } from "react-native";
 import { Grid, Col,Row } from "react-native-easy-grid";
+import get from 'lodash/get'
+import isEqual from 'lodash/isEqual'
+import { ListItem, SearchBar } from 'react-native-elements'
 
 import { connect } from "react-redux";
 import {
@@ -36,15 +39,17 @@ const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png")
 const Entities = require('html-entities').AllHtmlEntities
 const entities = new Entities()
-import ecocenter from "../../../data/ecocentre.json"
+import ecocenterData from "../../../data/ecocentre.json"
+import {distanceBetweenCoordinates} from '../../utils/GeoUtils'
+import { MenuProvider, Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu'
+import {askLocationPermission,fetchLocation, fetchEcocenters,updateLocation} from '../../actions/location'
 
 class Ecocenter extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      ecocenters: ecocenter,
-      locationStr: ""
+      locationStr: get(props, 'fetchedLocation.formatted', '')
     }
   }
 
@@ -52,46 +57,34 @@ class Ecocenter extends React.Component {
     if(this.props.location == null){
       this.props.askLocationPermission()
     }
-    const{ coords: {latitude, longitude}} = this.props.location
-    fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(latitude).toFixed(5)}&lng=${Number(longitude).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
-    res.json().then(json => {
-        this.setState({ecocenters: [...ecocenter, ...json], isLoading: false})
-      })
-    })
-    if(this.props.location){
-      fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=1c886d010a164f299c4101c98f151cd9`).then(res => {
-      res.json().then(json => {
-          this.setState({locationStr: json.results[0].formatted})
-        })
-      })
+    const geometry = get(this.props, 'fetchedLocation.geometry')
+    if(geometry){
+      this.props.fetchEcocenters([geometry.lng, geometry.lat])
     }
   }
 
-  updateLocationStr = async(locationStr) => {
-    fetch(`https://api.opencagedata.com/geocode/v1/json?q=${locationStr}&key=1c886d010a164f299c4101c98f151cd9`).then(res => {
-      res.json().then(json => {
-          if(!json.results || json.results.length === 0 ){
-            Toast.show({
-              text: "Adresse invalide",
-              duration: 2500,
-              position: "bottom",
-              textStyle: { textAlign: "center" }
-            });
-          }else {
-            const {lat, lng} = json.results[0].geometry
-            const formattedAddress = json.results[0].formatted
-            this.setState({locationStr: formattedAddress})
-            fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(lat).toFixed(5)}&lng=${Number(lng).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
-              res.json().then(json => {
-                  this.setState({ecocenters: [...ecocenter, ...json]})
-                })
-              })
-          }
-        })
-      }) 
+  componentDidUpdate = (prevProps) => {
+    console.log(get(prevProps, 'fetchedLocation.formatted'), get(this.props, 'fetchedLocation.formatted'))
+    if(get(prevProps, 'fetchedLocation.formatted') !== get(this.props, 'fetchedLocation.formatted')){
+      this.setState({locationStr: get(this.props, 'fetchedLocation.formatted')})
+      const geometry = get(this.props, 'fetchedLocation.geometry')
+      this.props.fetchEcocenters([geometry.lng, geometry.lat])
+    }
   }
 
-  openStore = (lat, lng, label) => {
+  searchLocation = async(locationStr) => {
+    if(locationStr !== ''){
+      this.props.fetchLocation(locationStr)
+    }else {
+      this.setState({locationStr: get(this.props, 'fetchedLocation.formatted')})
+    }
+  }
+
+  updateLocationString = (locationStr) => {
+    this.setState({locationStr: locationStr})
+  }
+
+  openStore = (lng, lat, label) => {
     const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
     const latLng = `${lat},${lng}`;
     const url = Platform.select({
@@ -106,65 +99,86 @@ class Ecocenter extends React.Component {
       return this._renderEcocenter(item)
     }
     return (
-      <TouchableOpacity
-        style={{ flexDirection: "row" }}
-        onPress={() => this.openStore(item.lat, item.lng, entitites.decode(item.store))}
-      >
-        <View style={styles.newsContent}>
-          <Text numberOfLines={2} style={styles.newsHeader}>
-          {entities.decode(item.store)}
-          </Text>
-          <Grid style={styles.swiperContentBox}>
-          <Row>
+      <ListItem
+      // leftAvatar={{ source: { uri: l.avatar_url } }}
+      title={entities.decode(item.store)}
+      subtitle={
+        <RNView>
+          <Grid >
+      <Row>
             <Col style={{ flexDirection: "row" }}>
               <Text style={styles.newsLink}>
-                {entities.decode(item.description.replace(/<(?:.|\n)*?>/gm, ''))}
+              {entities.decode(item.description.replace(/<(?:.|\n)*?>/gm, ''))}
               </Text>
             </Col>
+   
             </Row>
             <Row>
-            <Col style={{ flexDirection: "row" }}>
-              <Text style={styles.newsLink}>
-                Distance: {item.distance}km
-              </Text>
-            </Col>
-            </Row>
-            <Row>
-            <Col style={{ flexDirection: "row" }} onPress={() => Linking.openURL(item.url)}>
-              <Text style={styles.newsLink}>
-                {item.url}
-              </Text>
-            </Col>
+            <Col>
+            {item.url ?
+            <Text style={styles.newsLink} onPress={() => Linking.openURL(item.url)}>
+                {item.url.match(/([a-zA-Z]*\.){1,2}([a-zA-Z]*)/)[0]}
+              </Text> : null
+            }
+              </Col>
             </Row>
           </Grid>
-        </View>
-      </TouchableOpacity>
-    );
+        </RNView>
+      }
+      rightIcon={
+        <RNView>
+          <Icon name="bicycle" style={styles.timeIcon} />
+        <Text style={styles.newsLink}>
+          {item.distance.toFixed(1)}km
+        </Text>
+        </RNView>
+      }
+      containerStyle={{
+        borderBottomWidth: 1
+      }}
+      onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
+    />
+    )
+
   };
 
   _renderEcocenter = (item) => {
-    return (<TouchableOpacity
-    style={{ flexDirection: "row" }}
-    onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
-  >
-    <View style={styles.newsContent}>
-      <Text numberOfLines={2} style={styles.newsHeader}>
-      {item.properties["NOM_TOPOGRAPHIE"]}
-      </Text>
-      <Grid style={styles.swiperContentBox}>
-          <Row>
-          <Col style={{ flexDirection: "row" }} onPress={() => Linking.openURL(item.url)}>
+    const{ coords: {latitude, longitude}} = this.props.location
+    return (
+      <ListItem
+      key={`${item.geometry.coordinates[0]}${item.geometry.coordinates[1]}`}
+      // leftAvatar={{ source: { uri: l.avatar_url } }}
+      title={item.properties["NOM_TOPOGRAPHIE"]}
+      subtitle={
+        <RNView>
+          <Grid >
+      <Row>
+            <Col style={{ flexDirection: "row" }}>
               <Text style={styles.newsLink}>
-                Écocentre officiel
+                Écocentre officiel {'\n'}
               </Text>
             </Col>
-          </Row>
+            </Row>
           </Grid>
-    </View>
-    </TouchableOpacity> )
+        </RNView>
+      }
+      rightIcon={
+        <RNView>
+          <Icon name="bicycle" style={styles.timeIcon} />
+        <Text style={styles.newsLink}>
+          {distanceBetweenCoordinates([longitude, latitude], item.geometry.coordinates).toFixed(1)}km
+        </Text>
+        </RNView>
+      }
+      containerStyle={{
+        borderBottomWidth: 1
+      }}
+      onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
+    />
+    )
   }
    render() {
-     const {ecocenters} = this.state
+     const {ecocenters} = this.props
      return (
       <Container>
       <Header>
@@ -178,19 +192,28 @@ class Ecocenter extends React.Component {
         <Body>
           <Image source={headerLogo} style={styles.imageHeader} />
         </Body>
-        <Right />
+        <Right>
+        <TouchableOpacity
+        style={{ flexDirection: "row" }}
+        onPress={() => this.props.updateLocation()}>
+            <Icon active name="locate" />
+            </TouchableOpacity>
+          </Right>
       </Header>
       <View style={{    justifyContent: 'center',
       flex: 1,
       backgroundColor:'white'}}>
-      <TextInput
-        style={{paddingLeft: 10, paddingRight: 10, height: 40, borderColor: 'gray', borderWidth: 1}}
-        onSubmitEditing={e => this.updateLocationStr(e.nativeEvent.text)}
+      <SearchBar
+      platform={Platform.OS}
+        onChange={e => this.updateLocationString(e.nativeEvent.text)}
+        onSubmitEditing={e => this.searchLocation(e.nativeEvent.text)}
         value={this.state.locationStr}/>
+        <MenuProvider>
         <FlatList
-          data={ecocenters}
+          data={[...ecocenterData, ...ecocenters]}
           renderItem={this._renderItem}
           keyExtractor={item => item.lat + item.lng}/>
+          </MenuProvider>
       </View>
       </Container>
      )
@@ -198,11 +221,16 @@ class Ecocenter extends React.Component {
 }
 function bindAction(dispatch) {
   return {
-    askLocationPermission: () => dispatch(askLocationPermission())
+    askLocationPermission: () => dispatch(askLocationPermission()),
+    fetchLocation: (search) => dispatch(fetchLocation(search)),
+    fetchEcocenters: (coord) => dispatch(fetchEcocenters(coord)),
+    updateLocation: () => dispatch(updateLocation())
   };
 }
 
 const mapStateToProps = state => ({
-  location: state.locationReducer.location
+  location: state.locationReducer.location,
+  fetchedLocation: state.locationReducer.fetchedLocation,
+  ecocenters: state.locationReducer.ecocenters
 });
 export default connect(mapStateToProps, bindAction)(Ecocenter);
