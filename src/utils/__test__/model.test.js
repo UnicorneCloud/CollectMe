@@ -11,7 +11,7 @@ describe("When creating the frequence", () => {
   beforeEach(() => {
     myFrequence = createFrequence(DAYS_OF_THE_WEEK, 1);
   });
-  
+
   it("should by a set for 'days'", () => {
     expect(myFrequence.days.type).toBe(Set.prototype.type);
   });
