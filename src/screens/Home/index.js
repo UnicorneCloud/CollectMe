@@ -104,8 +104,8 @@ class Home extends Component {
       </TouchableOpacity>
     );
   };
-  render() {
 
+  render() {
     const itemsHeader = this.props.itemsHeader || []
 
     if (this.props.isLoading) {

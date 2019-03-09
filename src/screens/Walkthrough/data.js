@@ -14,21 +14,21 @@ export const DATA = [
 	"headline": "Toujours avoir des ustensiles dans son sac!",
 	"icon": <MaterialCommunityIcons name="silverware-fork" style={styles.imageIcons} />
 },
-{
-	"id": 2,
-	"headline": "Acheter local et en vrac!",
-	"icon": <MaterialCommunityIcons name="truck-fast" style={styles.imageIcons} />
-},
+// {
+// 	"id": 2,
+// 	"headline": "Acheter local et en vrac!",
+// 	"icon": <MaterialCommunityIcons name="truck-fast" style={styles.imageIcons} />
+// },
 {
 	"id": 3,
 	"headline": "Penser réutilisable et non jetable!",
 	"icon": <MaterialCommunityIcons name="recycle" style={styles.imageIcons} />
 },
-{
-	"id": 4,
-	"headline": "Fabriquer son propre rince-bouche maison!",
-	"icon": <MaterialCommunityIcons name="spray" style={styles.imageIcons} />
-},
+// {
+// 	"id": 4,
+// 	"headline": "Fabriquer son propre rince-bouche maison!",
+// 	"icon": <MaterialCommunityIcons name="spray" style={styles.imageIcons} />
+// },
 {
 	"id": 5,
 	"headline": "Faire son épicerie en vrac avec ses vieux contenants!",
