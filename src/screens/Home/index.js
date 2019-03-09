@@ -52,11 +52,12 @@ class Home extends Component {
   async resetScheduledNotifications(collectSchedules){
     await Notifications.cancelAllScheduledNotificationsAsync()
     await Promise.all(Object.keys(collectSchedules).map(collectType => {
-      console.log(collectType)
-      console.log(collectSchedules[collectType])
-      return Notifications.cancelAllScheduledNotificationsAsync({
-        title: collectType,
-        body: collectSchedules[collectType]
+      return Notifications.scheduleLocalNotificationAsync({
+        title: collectType.toString(),
+        body: collectSchedules[collectType].toString()
+      },
+      {
+        time: (new Date()).getTime() + 1000
       })
     }))
   }
@@ -66,7 +67,7 @@ class Home extends Component {
     if(prevProps.location !== location){
       const collectSchedules = getCollectScheduleData(location)
       this.props.setAllCollectSchedules(collectSchedules)
-      //await this.resetScheduledNotifications(collectSchedules)
+      await this.resetScheduledNotifications(collectSchedules)
     }
   }
   
