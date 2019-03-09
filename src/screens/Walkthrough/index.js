@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Platform, Dimensions, StatusBar, View } from "react-native";
-import { Container, Content, Text, Button, Icon } from "native-base";
+import { Container, Content, Text, Button } from "native-base";
 import Carousel from "react-native-carousel-view";
 import { connect } from "react-redux";
 
@@ -12,6 +12,8 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 
 import { Permissions, Notifications } from 'expo'
+import { askLocationPermission } from '../../actions/location';
+import Constants from "expo/src/Constants";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -91,6 +93,13 @@ class Walkthrough extends Component {
   }
   
   componentDidMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this.props.askLocationPermission();
+    }
     registerForPushNotificationsAsync()
   }
 
@@ -154,7 +163,8 @@ class Walkthrough extends Component {
 
 function bindAction(dispatch) {
   return {
-    fetchData: url => dispatch(tipsFetch(url))
+    fetchData: url => dispatch(tipsFetch(url)),
+    askLocationPermission: () => dispatch(askLocationPermission()),
   };
 }
 

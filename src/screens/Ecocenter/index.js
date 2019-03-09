@@ -136,7 +136,7 @@ class Ecocenter extends React.Component {
       containerStyle={{
         borderBottomWidth: 1
       }}
-      onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
+      onPress={() => this.openStore(item.lng, item.lat, entities.decode(item.store))}
     />
     )
 

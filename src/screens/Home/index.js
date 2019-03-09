@@ -30,7 +30,7 @@ import Carousel from "react-native-carousel-view";
 import styles from "./styles";
 import { setAllCollectSchedules } from '../../actions'
 import { itemsFetchData, itemsHeaderFetchData } from "./actions"
-import { getCollectScheduleData } from '../../utils/model'
+import { getCollectScheduleData, getUpcomingCollectDates } from '../../utils/model'
 import { askLocationPermission } from '../../actions/location';
 
 const deviceWidth = Dimensions.get("window").width;
@@ -38,28 +38,28 @@ const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
   componentDidMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-      });
-    } else {
-      this.props.askLocationPermission();
-    }
     this.props.fetchData()
     this.props.fetchHeaderData()
   }
   
   async resetScheduledNotifications(collectSchedules){
-    await Notifications.cancelAllScheduledNotificationsAsync()
-    await Promise.all(Object.keys(collectSchedules).map(collectType => {
-      return Notifications.scheduleLocalNotificationAsync({
-        title: collectType.toString(),
-        body: collectSchedules[collectType].toString()
-      },
-      {
-        time: (new Date()).getTime() + 1000
-      })
-    }))
+    //await Notifications.cancelAllScheduledNotificationsAsync()
+    //await Promise.all(Object.keys(collectSchedules)
+    //  .map(collectType => {
+    //    const collectSchedule = collectSchedules[collectType]
+    //    console.log(collectSchedule)
+    //    const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
+    //    console.log(dates)
+    //    return dates.map(date => 
+    //       Notifications.scheduleLocalNotificationAsync({
+    //        title: collectType.charAt(0).toUpperCase() + collectType.slice(1),
+    //        body: 'La collecte de ' + collectType + ' est demain matin.'
+    //      },
+    //      {
+    //        time: date.subtract(1, 'day').set('hour', 18).toDate()
+    //      })
+    //    )
+    //  }).flat())
   }
   
   async componentDidUpdate(prevProps, prevState){
@@ -194,7 +194,6 @@ function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
     fetchHeaderData: url => dispatch(itemsHeaderFetchData(url)),
-    askLocationPermission: () => dispatch(askLocationPermission()),
     setAllCollectSchedules: (collectSchedules) => dispatch(setAllCollectSchedules(collectSchedules))
   };
 }
