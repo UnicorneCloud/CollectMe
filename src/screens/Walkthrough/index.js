@@ -58,8 +58,12 @@ async function registerForPushNotificationsAsync() {
   console.log('#3')
 
   // Get the token that uniquely identifies this device
-  const token = await Notifications.getExpoPushTokenAsync();
-  console.log('TOKEN:', token)
+  Notifications.getExpoPushTokenAsync().then(result => {
+    console.log('TOKEN:', result)
+  }).catch((error) => {
+    console.log(error)
+  })
+  
 
   // POST the token to your backend server from where you can retrieve it to send push notifications.
   // return fetch(PUSH_ENDPOINT, {
