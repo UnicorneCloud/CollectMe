@@ -36,14 +36,14 @@ const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png")
 const Entities = require('html-entities').AllHtmlEntities
 const entities = new Entities()
+import ecocenter from "../../../data/ecocentre.json"
 
 class Ecocenter extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      ecocenters: [],
-      isLoading: true,
+      ecocenters: ecocenter,
       locationStr: ""
     }
   }
@@ -55,7 +55,7 @@ class Ecocenter extends React.Component {
     const{ coords: {latitude, longitude}} = this.props.location
     fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(latitude).toFixed(5)}&lng=${Number(longitude).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
     res.json().then(json => {
-        this.setState({ecocenters: json, isLoading: false})
+        this.setState({ecocenters: [...ecocenter, ...json], isLoading: false})
       })
     })
     if(this.props.location){
@@ -68,11 +68,9 @@ class Ecocenter extends React.Component {
   }
 
   updateLocationStr = async(locationStr) => {
-    this.setState({isLoading: true})
     fetch(`https://api.opencagedata.com/geocode/v1/json?q=${locationStr}&key=1c886d010a164f299c4101c98f151cd9`).then(res => {
       res.json().then(json => {
           if(!json.results || json.results.length === 0 ){
-            this.setState({isLoading: false})
             Toast.show({
               text: "Adresse invalide",
               duration: 2500,
@@ -85,7 +83,7 @@ class Ecocenter extends React.Component {
             this.setState({locationStr: formattedAddress})
             fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(lat).toFixed(5)}&lng=${Number(lng).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
               res.json().then(json => {
-                  this.setState({ecocenters: json, isLoading: false})
+                  this.setState({ecocenters: [...ecocenter, ...json]})
                 })
               })
           }
@@ -93,10 +91,9 @@ class Ecocenter extends React.Component {
       }) 
   }
 
-  openStore = (item) => {
+  openStore = (lat, lng, label) => {
     const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
-    const latLng = `${item.lat},${item.lng}`;
-    const label = entities.decode(item.store);
+    const latLng = `${lat},${lng}`;
     const url = Platform.select({
       ios: `${scheme}${label}@${latLng}`,
       android: `${scheme}${latLng}(${label})`
@@ -105,10 +102,13 @@ class Ecocenter extends React.Component {
   }
 
   _renderItem = ({ item }) => {
+    if(item.properties && item.properties["NOM_TOPOGRAPHIE"]){
+      return this._renderEcocenter(item)
+    }
     return (
       <TouchableOpacity
         style={{ flexDirection: "row" }}
-        onPress={() => this.openStore(item)}
+        onPress={() => this.openStore(item.lat, item.lng, entitites.decode(item.store))}
       >
         <View style={styles.newsContent}>
           <Text numberOfLines={2} style={styles.newsHeader}>
@@ -141,8 +141,30 @@ class Ecocenter extends React.Component {
       </TouchableOpacity>
     );
   };
+
+  _renderEcocenter = (item) => {
+    return (<TouchableOpacity
+    style={{ flexDirection: "row" }}
+    onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
+  >
+    <View style={styles.newsContent}>
+      <Text numberOfLines={2} style={styles.newsHeader}>
+      {item.properties["NOM_TOPOGRAPHIE"]}
+      </Text>
+      <Grid style={styles.swiperContentBox}>
+          <Row>
+          <Col style={{ flexDirection: "row" }} onPress={() => Linking.openURL(item.url)}>
+              <Text style={styles.newsLink}>
+                Écocentre officiel
+              </Text>
+            </Col>
+          </Row>
+          </Grid>
+    </View>
+    </TouchableOpacity> )
+  }
    render() {
-     const {ecocenters, isLoading} = this.state
+     const {ecocenters} = this.state
      return (
       <Container>
       <Header>
@@ -165,19 +187,10 @@ class Ecocenter extends React.Component {
         style={{paddingLeft: 10, paddingRight: 10, height: 40, borderColor: 'gray', borderWidth: 1}}
         onSubmitEditing={e => this.updateLocationStr(e.nativeEvent.text)}
         value={this.state.locationStr}/>
-        {isLoading ? 
-        <View style={{
-          justifyContent: 'center',
-          flex: 1,
-          backgroundColor:'white'
-          }}>
-            <Spinner/>
-        </View> :
         <FlatList
           data={ecocenters}
           renderItem={this._renderItem}
           keyExtractor={item => item.lat + item.lng}/>
-            }
       </View>
       </Container>
      )
