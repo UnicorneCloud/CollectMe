@@ -1,0 +1,123 @@
+{
+  "composteCommunautaire": [{
+    "nom": "Parc Henri-Casault",
+    "address": "5395 4e Avenue Ouest",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.2661433,
+        46.8442985
+      ]
+    }
+  },{
+    "nom": "Loisirs Montcalm",
+    "address": "265, boulevard René-Lévesque Ouest",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.2309327,
+        46.802577
+      ]
+    }
+  },{
+    "nom": "Parc Ferland",
+    "address": "1600, 8e Avenue",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.2305426,
+        46.8321086
+      ]
+    }
+  },{
+    "nom": "École de cirque",
+    "address": "750, 2e avenue",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.2314695,
+        46.8244308
+      ]
+    }
+  },{
+    "nom": "Parc Cartier-Brébeuf",
+    "address": "175, rue De L'Espinay",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.239686,
+        46.825994
+      ]
+    }
+  },{
+    "nom": "Patro Laval",
+    "address": "145, rue Bigaouette",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.2439653,
+        46.8123769
+      ]
+    }
+  },{
+    "nom": "Église Saint-Malo",
+    "address": "275, rue Marie-de-l'Incarnation",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.24608,
+        46.808813
+      ]
+    }
+  },{
+    "nom": "École Sacré-Cœur",
+    "address": "240, rue De Jumonville",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.237776,
+        46.813689
+      ]
+    }
+  },{
+    "nom": "Église Saint-Malo",
+    "address": "275, rue Marie-de-l'Incarnation",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.24608,
+        46.808813
+      ]
+    }
+  },{
+    "nom": "Îlot Fleurie",
+    "address": "Situé sous les bretelles de l'autoroute Dufferin-Montmorency",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.215868,
+        46.814019
+      ]
+    }
+  },{
+    "nom": "Église Notre-Dame de la Jacques-Cartier",
+    "address": "160-190, rue Saint-Joseph Est",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.228549,
+        46.812955
+      ]
+    }
+  },{
+    "nom": "Parc Richelieu",
+    "address": "Situé entre les rues Sainte-Claire et Sainte-Marie",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        -71.221093,
+        46.810822
+      ]
+    }
+  }]
+}
