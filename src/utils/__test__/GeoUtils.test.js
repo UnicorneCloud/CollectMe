@@ -1,4 +1,4 @@
-import getFrequence from '../GeoUtils';
+import { getFrequence } from '../GeoUtils';
 
 const FEATURE_OBJECT = {
   "type" : "Feature",
@@ -657,6 +657,14 @@ const FEATURE_OBJECT = {
     "JOUR_COLLECTE" : "lundi, chaque semaine"
   }
 };
+
+describe("when testing", () => {
+  describe("in a hackathon", () => {
+    beforeEach(() => {
+      
+    })
+  });
+});
 
 test('ez', () => {
   expect(getFrequence(FEATURE_OBJECT)).toBeTruthy();
