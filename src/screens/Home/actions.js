@@ -1,3 +1,4 @@
+
 export function itemsHasErrored(bool: boolean) {
   return {
     type: "ITEMS_HAS_ERRORED",

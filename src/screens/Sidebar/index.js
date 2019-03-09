@@ -43,6 +43,17 @@ class SideBar extends Component {
             <ListItem
               button
               onPress={() => {
+                navigation.navigate("Ecocentre");
+              }}
+              iconLeft
+              style={styles.links}
+            >
+              <Icon name="ios-trash" />
+              <Text style={styles.linkText}>ECOCENTER</Text>
+            </ListItem>
+            <ListItem
+              button
+              onPress={() => {
                 navigation.navigate("Channels");
               }}
               iconLeft
