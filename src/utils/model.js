@@ -98,12 +98,12 @@ export function* upcomingCollectDates (collectSchedule) {
   }
 }
 
-export const getUpcomingCollectDates = (collectSchedules, count = 14) => {
-  const upcomingCollectDates = []
-  const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedules)
+export const getUpcomingCollectDates = (collectSchedule, count) => {
+  const dates = []
+  const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
   for(let i=0; i<count; ++i){
-    upcomingCollectDates.push(upcomingCollectDatesGenerator.next())
+    dates.push(upcomingCollectDatesGenerator.next())
   }
-  return upcomingCollectDates
+  return dates
 }
 
