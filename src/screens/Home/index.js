@@ -23,12 +23,12 @@ import {
   View,
   Spinner
 } from "native-base";
-
+import { Notifications } from 'expo'
 import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
-
-import { itemsFetchData, itemsHeaderFetchData } from "./actions";
-
+import { setAllCollectSchedules } from '../../actions'
+import { itemsFetchData, itemsHeaderFetchData } from "./actions"
+import { getCollectScheduleData } from '../../utils/model'
 import datas from "./data.json"
 import dataHeader from './data.header.json'
 
@@ -40,7 +40,6 @@ const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
-
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
@@ -52,7 +51,28 @@ class Home extends Component {
     this.props.fetchData(datas)
     this.props.fetchHeaderData(dataHeader)
   }
-
+  
+  async resetScheduledNotifications(collectSchedules){
+    await Notifications.cancelAllScheduledNotificationsAsync()
+    await Promise.all(Object.keys(collectSchedules).map(collectType => {
+      console.log(collectType)
+      console.log(collectSchedules[collectType])
+      return Notifications.cancelAllScheduledNotificationsAsync({
+        title: collectType,
+        body: collectSchedules[collectType]
+      })
+    }))
+  }
+  
+  async componentDidUpdate(prevProps, prevState){
+    const { location } = this.props
+    if(prevProps.location !== location){
+      const collectSchedules = getCollectScheduleData(location)
+      this.props.setAllCollectSchedules(collectSchedules)
+      //await this.resetScheduledNotifications(collectSchedules)
+    }
+  }
+  
   _renderItem = ({ item }) => {
     return (
       <TouchableOpacity
@@ -177,7 +197,8 @@ function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
     fetchHeaderData: url => dispatch(itemsHeaderFetchData(url)),
-    askLocationPermission: () => dispatch(askLocationPermission())
+    askLocationPermission: () => dispatch(askLocationPermission()),
+    setAllCollectSchedules: (collectSchedules) => dispatch(setAllCollectSchedules(collectSchedules))
   };
 }
 
@@ -185,6 +206,7 @@ const mapStateToProps = state => ({
   items: state.homeReducer.items,
   itemsHeader: state.homeReducer.itemsHeader,
   hasErrored: state.homeReducer.hasErrored,
-  isLoading: state.homeReducer.isLoading
+  isLoading: state.homeReducer.isLoading,
+  location: state.locationReducer.location,
 });
 export default connect(mapStateToProps, bindAction)(Home);
