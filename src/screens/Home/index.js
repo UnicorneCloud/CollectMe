@@ -29,7 +29,7 @@ import Carousel from "react-native-carousel-view";
 
 import { itemsFetchData, itemsHeaderFetchData } from "./actions";
 
-import datas from "./data.json";
+import datas from "./data.json"
 import dataHeader from './data.header.json'
 
 import styles from "./styles";
@@ -119,9 +119,9 @@ class Home extends Component {
                   indicatorColor="#FFF"
                   indicatorOffset={10}
                   animate={false} >
-                  {itemsHeader.map((item) => {
+                  {itemsHeader.map((item, index) => {
                     return (
-                      <RNView>
+                      <RNView key={index}>
                         <TouchableOpacity
                           activeOpacity={1}
                           onPress={() => this.props.navigation.navigate("Story",{id: item.id})}
