@@ -14,6 +14,7 @@ import Channels from "./screens/Channels";
 import Sidebar from "./screens/Sidebar";
 import Overview from "./screens/Overview";
 import Calendar from "./screens/Calendar/";
+import Collectes from "./screens/Collectes";
 import Timeline from "./screens/Timeline";
 import Feedback from "./screens/Feedback/";
 import Profile from "./screens/Profile/";
@@ -26,6 +27,7 @@ const Drawer = createDrawerNavigator(
     Channels: { screen: Channels },
     Overview: { screen: Overview },
     Calendar: { screen: Calendar },
+    Collectes: { screen: Collectes },
     Timeline: { screen: Timeline },
     Feedback: { screen: Feedback },
     Profile: { screen: Profile },

@@ -27,29 +27,21 @@ import {
 import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
 
-import { itemsFetchData, setLocation, getLocation } from "../../actions";
+import { itemsFetchData, itemsHeaderFetchData } from "./actions";
+
 import datas from "./data.json";
+import dataHeader from './data.header.json'
 
 import styles from "./styles";
-import { WebBrowser, Constants, Location, Permissions } from 'expo';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
 
-  componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-      });
-    } else {
-      this.props.getLocation();
-    }
-  }
-
   componentDidMount() {
-    this.props.fetchData(datas);
+    this.props.fetchData(datas)
+    this.props.fetchHeaderData(dataHeader)
   }
 
   _renderItem = ({ item }) => {
@@ -88,6 +80,9 @@ class Home extends Component {
     );
   };
   render() {
+
+    const itemsHeader = this.props.itemsHeader || []
+
     if (this.props.isLoading) {
       return <Spinner />;
     } else {
@@ -95,10 +90,7 @@ class Home extends Component {
         <Container>
           <Header>
             <Left>
-              <Button
-                transparent
-                onPress={() => this.props.navigation.openDrawer()}
-              >
+              <Button transparent onPress={() => this.props.navigation.openDrawer()}>
                 <Icon active name="menu" />
               </Button>
             </Left>
@@ -107,10 +99,7 @@ class Home extends Component {
             </Body>
             <Right />
           </Header>
-          <Content
-            showsVerticalScrollIndicator={false}
-            style={{ backgroundColor: "#fff" }}
-          >
+          <Content showsVerticalScrollIndicator={false} style={{ backgroundColor: "#fff" }} >
             <View>
               <View>
                 <Carousel
@@ -120,146 +109,45 @@ class Home extends Component {
                   indicatorSize={Platform.OS === "android" ? 15 : 10}
                   indicatorColor="#FFF"
                   indicatorOffset={10}
-                  animate={false}
-                >
-                  <RNView>
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={() => this.props.navigation.navigate("Story")}
-                      style={styles.slide}
-                    >
-                      <ImageBackground
-                        style={styles.newsPoster}
-                        source={require("../../../assets/NewsIcons/1.jpg")}
-                      >
-                        <View style={styles.swiperTextContent}>
-                          <Text
-                            numberOfLines={2}
-                            style={styles.newsPosterHeader}
-                          >
-                            Flat App is a style of interface design emphasizing
-                            minimal use of stylistic elements.
-                          </Text>
-                          <Grid style={styles.swiperContentBox}>
-                            <Col style={{ flexDirection: "row" }}>
-                              <Text style={styles.newsPosterLink}>
-                                SPACE.com
+                  animate={false} >
+                  {itemsHeader.map((item) => {
+                    return (
+                      <RNView>
+                        <TouchableOpacity
+                          activeOpacity={1}
+                          onPress={() => this.props.navigation.navigate("Story",{id: item.id})}
+                          style={styles.slide} >
+                          <ImageBackground
+                            style={styles.newsPoster}
+                            source={{uri:item.imageUri}} >
+                            <View style={styles.swiperTextContent}>
+                              <Text numberOfLines={2} style={styles.newsPosterHeader} >
+                                {item.headline}
                               </Text>
-                              <Icon
-                                name="ios-time-outline"
-                                style={styles.timePosterIcon}
-                              />
-                              <Text style={styles.newsPosterLink}>20m ago</Text>
-                            </Col>
-                            <Col>
-                              <TouchableOpacity
-                                style={styles.newsPosterTypeView}
-                              >
-                                <Text
-                                  style={styles.newsPosterTypeText}
-                                  onPress={() =>
-                                    this.props.navigation.navigate("Channel")}
-                                >
-                                  SCIENCE
-                                </Text>
-                              </TouchableOpacity>
-                            </Col>
-                          </Grid>
-                        </View>
-                      </ImageBackground>
-                    </TouchableOpacity>
-                  </RNView>
-                  <RNView>
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={() => this.props.navigation.navigate("Story")}
-                      style={styles.slide}
-                    >
-                      <ImageBackground
-                        style={styles.newsPoster}
-                        source={require("../../../assets/NewsIcons/3.jpg")}
-                      >
-                        <View style={styles.swiperTextContent}>
-                          <Text
-                            numberOfLines={2}
-                            style={styles.newsPosterHeader}
-                          >
-                            So that the applications are able to load faster and
-                            resize easily.
-                          </Text>
-                          <Grid style={styles.swiperContentBox}>
-                            <Col style={{ flexDirection: "row" }}>
-                              <Text style={styles.newsPosterLink}>CDC</Text>
-                              <Icon
-                                name="ios-time-outline"
-                                style={styles.timePosterIcon}
-                              />
-                              <Text style={styles.newsPosterLink}>2hr ago</Text>
-                            </Col>
-                            <Col>
-                              <TouchableOpacity
-                                style={styles.newsPosterTypeView}
-                              >
-                                <Text
-                                  style={styles.newsPosterTypeText}
-                                  onPress={() =>
-                                    this.props.navigation.navigate("Channel")}
-                                >
-                                  ENVIRONMENT
-                                </Text>
-                              </TouchableOpacity>
-                            </Col>
-                          </Grid>
-                        </View>
-                      </ImageBackground>
-                    </TouchableOpacity>
-                  </RNView>
-                  <RNView>
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={() => this.props.navigation.navigate("Story")}
-                      style={styles.slide}
-                    >
-                      <ImageBackground
-                        style={styles.newsPoster}
-                        source={require("../../../assets/NewsIcons/4.jpg")}
-                      >
-                        <View style={styles.swiperTextContent}>
-                          <Text
-                            numberOfLines={2}
-                            style={styles.newsPosterHeader}
-                          >
-                            But still look sharp on high-definition screens.
-                          </Text>
-                          <Grid style={styles.swiperContentBox}>
-                            <Col style={{ flexDirection: "row" }}>
-                              <Text style={styles.newsPosterLink}>SKY.com</Text>
-                              <Icon
-                                name="ios-time-outline"
-                                style={styles.timePosterIcon}
-                              />
-                              <Text style={styles.newsPosterLink}>
-                                1day ago
-                              </Text>
-                            </Col>
-                            <Col>
-                              <TouchableOpacity
-                                style={styles.newsPosterTypeView}
-                              >
-                                <Text
-                                  style={styles.newsPosterTypeText}
-                                  onPress={() =>
-                                    this.props.navigation.navigate("Channel")}
-                                >
-                                  WORLD
-                                </Text>
-                              </TouchableOpacity>
-                            </Col>
-                          </Grid>
-                        </View>
-                      </ImageBackground>
-                    </TouchableOpacity>
-                  </RNView>
+                              <Grid style={styles.swiperContentBox}>
+                                <Col style={{ flexDirection: "row" }}>
+                                  <Text style={styles.newsPosterLink}>
+                                    {item.link}
+                                  </Text>
+                                  <Icon name="ios-time-outline" style={styles.timePosterIcon} />
+                                  <Text style={styles.newsPosterLink}>{item.time}</Text>
+                                </Col>
+                                <Col>
+                                  <TouchableOpacity style={styles.newsPosterTypeView} >
+                                    <Text
+                                      style={styles.newsPosterTypeText}
+                                      onPress={() => this.props.navigation.navigate("Channel",{category: item.category})} >
+                                      {item.category}
+                                    </Text>
+                                  </TouchableOpacity>
+                                </Col>
+                              </Grid>
+                            </View>
+                          </ImageBackground>
+                        </TouchableOpacity>
+                      </RNView>
+                    )
+                  })}
                 </Carousel>
               </View>
             </View>
@@ -279,13 +167,13 @@ class Home extends Component {
 function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
-    setLocation,
-    getLocation: () => dispatch(getLocation())
+    fetchHeaderData: url => dispatch(itemsHeaderFetchData(url))
   };
 }
 
 const mapStateToProps = state => ({
   items: state.homeReducer.items,
+  itemsHeader: state.homeReducer.itemsHeader,
   hasErrored: state.homeReducer.hasErrored,
   isLoading: state.homeReducer.isLoading
 });

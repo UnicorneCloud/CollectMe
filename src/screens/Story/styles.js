@@ -195,5 +195,10 @@ export default {
   forwardBtn: {
     color: primary,
     fontSize: 26
+  },
+  imageHeader: {
+    height: 25,
+    width: 95,
+    resizeMode: "contain"
   }
 };
