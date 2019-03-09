@@ -77,7 +77,7 @@ class Walkthrough extends Component {
                       onPress={() => this.props.navigation.navigate("Drawer")}
                       style={styles.Button} >
                       <Text style={{ color: "#FFF", fontWeight: "600" }}>
-                        Fermer
+                        Continuer
                       </Text>
                     </Button>
                   </View>
