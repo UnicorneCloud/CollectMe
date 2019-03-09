@@ -1,5 +1,6 @@
 import React from 'react'
 import MapView from 'react-native-maps'
+import { Marker } from 'react-native-maps'
 import {
   Platform,
   Image,
@@ -36,7 +37,9 @@ class MapScreen extends React.Component {
     this.props.updateLocation()
   }
   render() {
-    const{ coords: {latitude, longitude}} = this.props.location
+    const {coords} = this.props.location
+    const{ latitude, longitude} = coords
+    console.log(coords)
     return (
       <Container>
       <Header>
@@ -52,6 +55,7 @@ class MapScreen extends React.Component {
       </Header>
         <View style={{flex:1, backgroundColor: 'powderblue'}}>
  <MapView
+ showsUserLocation
  style={styles.map}
     initialRegion={{
       latitude: latitude,
@@ -59,7 +63,8 @@ class MapScreen extends React.Component {
       latitudeDelta: 0.0922,
       longitudeDelta: 0.0421,
     }}
-  /> 
+  >
+  </MapView>
   </View>
   </Container>
     )
