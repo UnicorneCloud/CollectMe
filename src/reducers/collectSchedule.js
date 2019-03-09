@@ -3,6 +3,7 @@ import { createCollectSchedule } from '../utils/model'
 import { getFrequence } from '../utils/GeoUtils'
 
 const GeoJsonGeometriesLookup = require('geojson-geometries-lookup');
+
 const geojson = require('../../data/dechets.json')
 
 const glookup = new GeoJsonGeometriesLookup(geojson);
@@ -25,15 +26,16 @@ const initialState = {
   }
 }
 
-export default function(state: any = initialState, action: Function) {
+export default function (state: any = initialState, action: Function) {
   switch (action.type) {
     case SET_ALL_COLLECT_SCHEDULES:
       return {
-        ...state, 
+        ...state,
         allCollectSchedules: {
           ...state.allCollectSchedules,
           data: action.collectSchedules
-        }};
+        }
+      };
     default:
       return state;
   }
