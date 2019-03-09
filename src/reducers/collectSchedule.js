@@ -1,16 +1,25 @@
 import { SET_ALL_COLLECT_SCHEDULES } from '../utils/actionTypes'
-import { createCollectSchedule, createFrequence, WEEK_DAYS_MAP, COLLECT_TYPES } from '../utils/model'
+import { createCollectSchedule } from '../utils/model'
+import { getFrequence } from '../utils/GeoUtils'
 
-const dummyCollectSchedules = [
-  createCollectSchedule(createFrequence([WEEK_DAYS_MAP.MONDAY], 1), COLLECT_TYPES.THRASH),
-  createCollectSchedule(createFrequence([WEEK_DAYS_MAP.TUESDAY], 1), COLLECT_TYPES.RECYCLING),
-  createCollectSchedule(createFrequence([WEEK_DAYS_MAP.WEDNESDAY], 2), COLLECT_TYPES.RECYCLING),
-  createCollectSchedule(createFrequence([WEEK_DAYS_MAP.FRIDAY], 2), COLLECT_TYPES.THRASH)
-]
+const GeoJsonGeometriesLookup = require('geojson-geometries-lookup');
+const geojson = require('../../data/dechets.json')
+
+const glookup = new GeoJsonGeometriesLookup(geojson);
+
+// const latitude = 46.8169586;
+// const longitude = -71.2371529;
+
+const latitude = 46.8115809;
+const longitude = -71.2335447;
+
+
+const point1 = { type: 'Point', coordinates: [longitude, latitude] };
+const container = glookup.getContainers(point1);
 
 const initialState = {
   allCollectSchedules: {
-    data: dummyCollectSchedules,
+    data: container.features.map(feature => createCollectSchedule(getFrequence(feature), 'garbage')),
     error: null,
     fetchInProgress: false
   }

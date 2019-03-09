@@ -26,7 +26,7 @@ export const WEEK_DAYS_IN_DATA = {
 };
 
 export const COLLECT_TYPES = {
-  TRASH: 'Thrash',
+  TRASH: 'Trash',
   RECYCLING: 'Recycling'
 }
 
