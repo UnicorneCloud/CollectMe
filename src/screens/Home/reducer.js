@@ -1,8 +1,7 @@
 const initialState = {
   isLoading: true,
   hasErrored: false,
-  items: [],
-  location: null
+  items: []
 };
 export default function(state: any = initialState, action: Function) {
   switch (action.type) {
@@ -12,8 +11,6 @@ export default function(state: any = initialState, action: Function) {
       return { ...state, isLoading: action.isLoading };
     case "ITEMS_FETCH_DATA_SUCCESS":
       return { ...state, items: action.items };
-    case "SET_LOCATION_SUCCESS":
-      return {...state, items: action.location};
     default:
       return state;
   }

@@ -27,26 +27,15 @@ import {
 import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
 
-import { itemsFetchData, setLocation, getLocation } from "../../actions";
+import { itemsFetchData } from "../../actions";
 import datas from "./data.json";
 
 import styles from "./styles";
-import { WebBrowser, Constants, Location, Permissions } from 'expo';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
-
-  componentWillMount() {
-    if (Platform.OS === 'android' && !Constants.isDevice) {
-      this.setState({
-        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-      });
-    } else {
-      this.props.getLocation();
-    }
-  }
 
   componentDidMount() {
     this.props.fetchData(datas);
@@ -278,9 +267,7 @@ class Home extends Component {
 
 function bindAction(dispatch) {
   return {
-    fetchData: url => dispatch(itemsFetchData(url)),
-    setLocation,
-    getLocation: () => dispatch(getLocation())
+    fetchData: url => dispatch(itemsFetchData(url))
   };
 }
 
