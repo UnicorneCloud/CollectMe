@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "28.0.0",
     "icon": "./assets/DefaultIcon.png",
-    "slug": "strapflatapp",
+    "slug": "CollectMe",
     "splash": {
       "resizeMode": "cover",
       "image": "./assets/LaunchImages/splash-screen.png"
@@ -13,10 +13,10 @@
       "assetExts": ["ttf"]
     },
     "ios": {
-      "bundleIdentifier": "io.market.nativebase.geekyants.flatappui"
+      "bundleIdentifier": "com.unicornpowered.collectme"
     },
     "android": {
-      "package": "io.market.nativebase.geekyants.flatappui"
+      "package": "com.unicornpowered.collectme"
     },
     "androidStatusBarColor": "#01cca1",
     "androidStatusBar": {

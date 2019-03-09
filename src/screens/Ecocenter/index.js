@@ -199,16 +199,16 @@ class Ecocenter extends Component {
       flex: 1,
       backgroundColor:'white'}}>
       <SearchBar
-      platform={Platform.OS}
+        platform={Platform.OS}
         onChange={e => this.updateLocationString(e.nativeEvent.text)}
         onSubmitEditing={e => this.searchLocation(e.nativeEvent.text)}
         value={this.state.locationStr}/>
         <MenuProvider>
-        <FlatList
-          data={[...ecocenterData, ...ecocenters]}
-          renderItem={this._renderItem}
-          keyExtractor={(item, index) => index}/>
-          </MenuProvider>
+          <FlatList
+            data={[...ecocenterData, ...ecocenters]}
+            renderItem={this._renderItem}
+            keyExtractor={(item, index) => index}/>
+        </MenuProvider>
       </View>
       </Container>
      )

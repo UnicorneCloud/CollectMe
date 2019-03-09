@@ -30,19 +30,21 @@ export default {
     width: deviceWidth / 1 + 2
   },
   ioschannelImgText: {
-    fontSize: 12,
+    position: "absolute",
+    fontSize: 14,
     fontWeight: "900",
     padding: 20,
-    paddingLeft: 0,
-    paddingBottom: 0,
-    marginBottom: 0,
-    marginLeft: 20,
-    marginTop: deviceHeight / 6 + 10
+    bottom: -5,
+    width: "100%",
+    backgroundColor: "rgba(0,0,0,.7)"
   },
   achannelImgText: {
-    fontSize: 12,
+    position: "absolute",
+    fontSize: 14,
     fontWeight: "900",
-    marginLeft: 20,
-    marginTop: deviceHeight / 4 - 20
+    padding: 20,
+    bottom: -5,
+    width: "100%",
+    backgroundColor: "rgba(0,0,0,.7)"
   }
 };

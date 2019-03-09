@@ -47,7 +47,8 @@ export default {
   },
   timelineIcon: {
     alignSelf: "center",
-    color: "#999"
+    color: "#999",
+    fontSize: 20
   },
   timelineContentHeading: {
     color: primary,

@@ -6,7 +6,7 @@ import {
   Platform,
   Slider,
   Dimensions,
-  View as RNView
+  Linking
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -61,7 +61,7 @@ class Story extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData(datas)
+    this.props.fetchData()
     const itemId = this.props.navigation.getParam('id', '')
   }
 
@@ -107,7 +107,7 @@ class Story extends Component {
                 <View style={styles.newsContent}>
                   <Grid style={{ paddingBottom: 20 }}>
                     <Col style={{ flexDirection: "row" }}>
-                      <TouchableOpacity>
+                      <TouchableOpacity onPress={() => openTheURL(item.link)}>
                         <Text style={styles.newsLink}>{item.link}</Text>
                       </TouchableOpacity>
                       <Icon name="ios-time-outline" style={styles.timeIcon} />
@@ -140,6 +140,19 @@ function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
   };
+}
+
+function openTheURL(url) {
+  const theURL = "http://" + url;
+  Linking.canOpenURL(theURL)
+    .then((supported) => {
+      if (!supported) {
+        console.log("Can't handle url: " + theURL);
+      } else {
+        return Linking.openURL(theURL);
+      }
+    })
+    .catch((err) => console.error('An error occurred', err));
 }
 
 const mapStateToProps = state => ({
