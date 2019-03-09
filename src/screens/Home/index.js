@@ -48,7 +48,7 @@ class Home extends Component {
       .map(collectType => {
         const collectSchedule = collectSchedules[collectType]
         console.log(collectSchedule)
-        const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
+        //const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
         console.log(dates)
         return dates.map(date => 
            Notifications.scheduleLocalNotificationAsync({
