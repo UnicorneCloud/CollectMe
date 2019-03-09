@@ -31,7 +31,7 @@ export default {
   },
   ioschannelImgText: {
     position: "absolute",
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "900",
     padding: 20,
     bottom: -5,
@@ -40,7 +40,7 @@ export default {
   },
   achannelImgText: {
     position: "absolute",
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "900",
     padding: 20,
     bottom: -5,
