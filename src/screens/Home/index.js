@@ -43,23 +43,23 @@ class Home extends Component {
   }
   
   async resetScheduledNotifications(collectSchedules){
-    await Notifications.cancelAllScheduledNotificationsAsync()
-    await Promise.all(Object.keys(collectSchedules)
-      .map(collectType => {
-        const collectSchedule = collectSchedules[collectType]
-        console.log(collectSchedule)
-        const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
-        console.log(dates)
-        return dates.map(date => 
-           Notifications.scheduleLocalNotificationAsync({
-            title: collectType.charAt(0).toUpperCase() + collectType.slice(1),
-            body: 'La collecte de ' + collectType + ' est demain matin.'
-          },
-          {
-            time: date.subtract(1, 'day').set('hour', 18).toDate()
-          })
-        )
-      }).flat())
+    //await Notifications.cancelAllScheduledNotificationsAsync()
+    //await Promise.all(Object.keys(collectSchedules)
+    //  .map(collectType => {
+    //    const collectSchedule = collectSchedules[collectType]
+    //    console.log(collectSchedule)
+    //    const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
+    //    console.log(dates)
+    //    return dates.map(date => 
+    //       Notifications.scheduleLocalNotificationAsync({
+    //        title: collectType.charAt(0).toUpperCase() + collectType.slice(1),
+    //        body: 'La collecte de ' + collectType + ' est demain matin.'
+    //      },
+    //      {
+    //        time: date.subtract(1, 'day').set('hour', 18).toDate()
+    //      })
+    //    )
+    //  }).flat())
   }
   
   async componentDidUpdate(prevProps, prevState){

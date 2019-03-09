@@ -5,6 +5,7 @@ import homeReducer from "../screens/Home/reducer";
 import locationReducer from './location'
 import collectSchedule from './collectSchedule'
 import tipsReducer from './tips'
+import calendarReducer from '../screens/Calendar/reducer'
 
 export default combineReducers({
   form: formReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   locationReducer,
   collectSchedule,
   tipsReducer,
+  calendarReducer,
 });

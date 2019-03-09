@@ -24,11 +24,7 @@ import {
 } from "native-base";
 import { Grid, Col } from "react-native-easy-grid";
 
-import Modal from "react-native-modalbox";
-import Carousel from "react-native-carousel-view";
-
 import { itemsFetchData } from "../Home/actions";
-import datas from "../Home/data.json";
 
 import styles from "./styles";
 
@@ -65,7 +61,7 @@ class Story extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData(datas)
+    this.props.fetchData()
     const itemId = this.props.navigation.getParam('id', '')
   }
 
