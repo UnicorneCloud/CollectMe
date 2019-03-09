@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from "react";
 import {
   Platform,
@@ -15,14 +14,11 @@ import {
 } from "react-native";
 import { Grid, Col,Row } from "react-native-easy-grid";
 import get from 'lodash/get'
-import isEqual from 'lodash/isEqual'
 import { ListItem, SearchBar } from 'react-native-elements'
-
 import { connect } from "react-redux";
 import {
   Container,
   Header,
-  Content,
   Text,
   Button,
   Icon,
@@ -30,30 +26,27 @@ import {
   Body,
   Right,
   View,
-  Spinner,
-  Toast
 } from "native-base";
-
 import styles from "./styles";
-const deviceWidth = Dimensions.get("window").width;
-const headerLogo = require("../../../assets/header-logo.png")
-const Entities = require('html-entities').AllHtmlEntities
-const entities = new Entities()
-import ecocenterData from "../../../data/ecocentre.json"
 import {distanceBetweenCoordinates} from '../../utils/GeoUtils'
-import { MenuProvider, Menu, MenuOptions, MenuOption, MenuTrigger } from 'react-native-popup-menu'
+import ecocenterData from "../../../data/ecocentre.json"
+import { MenuProvider } from 'react-native-popup-menu'
 import {askLocationPermission,fetchLocation, fetchEcocenters,updateLocation} from '../../actions/location'
 
-class Ecocenter extends React.Component {
+const headerLogo = require("../../../assets/header-logo.png")
+const Entities = require('html-entities').AllHtmlEntities
+const entities = new Entities();
+
+class Ecocenter extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       locationStr: get(props, 'fetchedLocation.formatted', '')
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount() {
     if(this.props.location == null){
       this.props.askLocationPermission()
     }
@@ -63,7 +56,7 @@ class Ecocenter extends React.Component {
     }
   }
 
-  componentDidUpdate = (prevProps) => {
+  componentDidUpdate(prevProps) {
     console.log(get(prevProps, 'fetchedLocation.formatted'), get(this.props, 'fetchedLocation.formatted'))
     if(get(prevProps, 'fetchedLocation.formatted') !== get(this.props, 'fetchedLocation.formatted')){
       this.setState({locationStr: get(this.props, 'fetchedLocation.formatted')})
@@ -78,11 +71,11 @@ class Ecocenter extends React.Component {
     }else {
       this.setState({locationStr: get(this.props, 'fetchedLocation.formatted')})
     }
-  }
+  };
 
   updateLocationString = (locationStr) => {
     this.setState({locationStr: locationStr})
-  }
+  };
 
   openStore = (lng, lat, label) => {
     const scheme = Platform.select({ ios: 'maps:0,0?q=', android: 'geo:0,0?q=' });
@@ -176,9 +169,11 @@ class Ecocenter extends React.Component {
       onPress={() => this.openStore(item.geometry.coordinates[0], item.geometry.coordinates[1], item.properties["NOM_TOPOGRAPHIE"])}
     />
     )
-  }
+  };
+
    render() {
-     const {ecocenters} = this.props
+     const {ecocenters} = this.props;
+
      return (
       <Container>
       <Header>
