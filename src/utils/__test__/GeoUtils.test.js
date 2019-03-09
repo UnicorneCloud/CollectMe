@@ -2,9 +2,9 @@ import { WEEK_DAYS_MAP, createFrequence } from '../model';
 import { getFrequence, extractWeekDays, getPeriod } from '../GeoUtils';
 import {FEATURE_OBJECT_1, FEATURE_OBJECT_2, FEATURE_OBJECT_3} from './GeoUtilsDataset';
 
-const EXPECTED_FREQUENCE_1 = createFrequence([WEEK_DAYS_MAP.MONDAY], 1);
-const EXPECTED_FREQUENCE_2 = createFrequence([WEEK_DAYS_MAP.MONDAY, WEEK_DAYS_MAP.THURSDAY], 1);
-const EXPECTED_FREQUENCE_3 = createFrequence([WEEK_DAYS_MAP.MONDAY], 2);
+const EXPECTED_FREQUENCE_1 = createFrequence([WEEK_DAYS_MAP.MONDAY], 1, new Date("2017-06-05"), null);
+const EXPECTED_FREQUENCE_2 = createFrequence([WEEK_DAYS_MAP.MONDAY, WEEK_DAYS_MAP.THURSDAY], 1, new Date("2016-06-13"), null);
+const EXPECTED_FREQUENCE_3 = createFrequence([WEEK_DAYS_MAP.MONDAY], 2, new Date("2015-04-13"), new Date("2020-01-02"));
 
 describe("when doing tdd", () => {
   describe("in a hackathon", () => {
