@@ -44,7 +44,7 @@ async function registerForPushNotificationsAsync() {
   // iOS won't necessarily prompt the user a second time.
   if (existingStatus !== 'granted') {
     // Android remote notification permissions are granted during the app
-    // install, so this will only ask on iOS
+    // install, so this will only ask on iO
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
     finalStatus = status;
   }
@@ -57,8 +57,8 @@ async function registerForPushNotificationsAsync() {
   console.log('#3')
 
   // Get the token that uniquely identifies this device
-  let token = await Notifications.getExpoPushTokenAsync();
-  console.log('TOKEN: '+ token)
+  const token = await Notifications.getExpoPushTokenAsync();
+  console.log('TOKEN:', token)
 
   // POST the token to your backend server from where you can retrieve it to send push notifications.
   // return fetch(PUSH_ENDPOINT, {
