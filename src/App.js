@@ -53,7 +53,8 @@ const App = createStackNavigator(
   },
   {
     index: 0,
-    initialRouteName: "Login",
+    // initialRouteName: "Login",
+    initialRouteName: "Walkthrough",
     headerMode: "none"
   }
 );

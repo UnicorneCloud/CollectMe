@@ -38,7 +38,7 @@ class SideBar extends Component {
               style={styles.links}
             >
               <Icon name="ios-grid-outline" />
-              <Text style={styles.linkText}>NEWS</Text>
+              <Text style={styles.linkText}>ZÉRO DÉCHET</Text>
             </ListItem>
             <ListItem
               button
