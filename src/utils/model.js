@@ -90,7 +90,7 @@ export function* upcomingCollectDates (collectSchedule) {
   let nextCollectDay = now.add(weeksUntilNextCollect, 'week').set('day', 0)
 
   while(true){
-    for(day in collectSchedule.days){
+    for(const day of collectSchedule.days){
       nextCollectDay = nextCollectDay.set('day', day)
       yield nextCollectDay
     }
@@ -102,7 +102,7 @@ export const getUpcomingCollectDates = (collectSchedule, count) => {
   const dates = []
   const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
   for(let i=0; i<count; ++i){
-    dates.push(upcomingCollectDatesGenerator.next())
+    dates.push(upcomingCollectDatesGenerator.next().value)
   }
   return dates
 }

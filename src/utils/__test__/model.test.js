@@ -1,4 +1,4 @@
-import {WEEK_DAYS, createFrequence} from '../model';
+import {WEEK_DAYS, createFrequence, upcomingCollectDates, getUpcomingCollectDates } from '../model';
 
 const EXPECTED_FREQUENCE = new Map([
   ["days", new Set(WEEK_DAYS)],
@@ -24,3 +24,29 @@ describe("When creating the frequence", () => {
     expect(myFrequence.period).toBe(EXPECTED_FREQUENCE.get("period"));
   });
 });
+
+
+describe('upcomingCollectDates', () => {
+  it('should not crash', () => {
+    const collectSchedule = {
+      startDate: new Date(2019, 3, 9),
+      days: new Set([0, 1, 2]),
+      period: 2
+    }
+    const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
+    expect(upcomingCollectDatesGenerator.next().value)
+  })
+})
+
+describe('getUpcomingCollectDates', () => {
+  it('should not crash', () => {
+    const collectSchedule = {
+      startDate: new Date(2019, 3, 9),
+      days: new Set([0, 1, 2]),
+      period: 2
+    }
+    const result = getUpcomingCollectDates(collectSchedule, 5)
+    console.log(result)
+    expect(result).toHaveLength(5)
+  })
+})
