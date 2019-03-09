@@ -49,7 +49,7 @@ class SideBar extends Component {
               style={styles.links}
             >
               <Icon name="ios-trash" />
-              <Text style={styles.linkText}>ECOCENTER</Text>
+              <Text style={styles.linkText}>TROUVER UN ÉCOCENTRE</Text>
             </ListItem>
             <ListItem
               button

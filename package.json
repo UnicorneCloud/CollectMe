@@ -38,7 +38,9 @@
     "@expo/vector-icons": "^6.3.1",
     "babel-preset-expo": "^4.0.0",
     "color": "3.1.0",
+    "decode-html": "^2.0.0",
     "expo": "28.0.0",
+    "html-entities": "^1.2.1",
     "jest-cli": "23.5.0",
     "lodash": "4.17.11",
     "moment": "2.22.2",
@@ -48,6 +50,7 @@
     "react-native-calendars": "1.21.0",
     "react-native-carousel-view": "^0.5.1",
     "react-native-easy-grid": "0.2.0",
+    "react-native-elements": "^1.1.0",
     "react-native-modalbox": "1.6.0",
     "react-navigation": "2.17.0",
     "react-redux": "5.1.1",
@@ -56,7 +59,7 @@
     "redux-persist": "5.10.0",
     "redux-thunk": "2.3.0",
     "remote-redux-devtools": "0.5.13",
-    "whatwg-fetch": "^2.0.4",
-    "remote-redux-devtools-on-debugger": "^0.8.3"
+    "remote-redux-devtools-on-debugger": "^0.8.3",
+    "whatwg-fetch": "^2.0.4"
   }
 }
