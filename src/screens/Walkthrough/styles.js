@@ -73,5 +73,8 @@ export default {
     alignSelf: "center",
     paddingHorizontal: 20,
     backgroundColor: "rgba(0,0,0,0.2)"
+  },
+  titleText: {
+    fontSize: 20
   }
 };
