@@ -19,7 +19,6 @@ describe("when doing tdd", () => {
     it("should work 3", () => {
       expect(getFrequence(FEATURE_OBJECT_3)).toEqual(EXPECTED_FREQUENCE_3);
     });
-    
   });
 
   describe("for extracting week day", () => {
