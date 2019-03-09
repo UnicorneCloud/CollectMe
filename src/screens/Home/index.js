@@ -36,9 +36,11 @@ const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
+
   componentDidMount() {
     this.props.fetchData(datas);
   }
+
   _renderItem = ({ item }) => {
     return (
       <TouchableOpacity
