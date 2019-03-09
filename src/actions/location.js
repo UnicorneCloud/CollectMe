@@ -63,7 +63,7 @@ export const fetchLocationSuccess = (fetchedLocation) => {
 export const fetchEcocentersSuccess = (ecocenters) => {
   return {
     type: "FETCH_ECOCENTERS_SUCCESS",
-    ecocenters
+    ecocenters : ecocenters || []
   }
 }
 
