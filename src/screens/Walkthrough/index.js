@@ -2,8 +2,6 @@
 import React, { Component } from "react";
 import { Platform, Dimensions, StatusBar, View } from "react-native";
 import { Container, Content, Text, Button, Icon } from "native-base";
-import { connect } from "react-redux";
-import { Notifications } from 'expo'
 import Carousel from "react-native-carousel-view";
 
 import styles from "./styles";
@@ -11,17 +9,6 @@ import styles from "./styles";
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
 class Walkthrough extends Component {
-  async componentDidMount(){
-    const { allCollectSchedules: { data: collectSchedules } } = this.props
-    await Notifications.cancelAllScheduledNotificationsAsync()
-    await Promise.all(
-      collectSchedules.map(collectSchedule => 
-        Notifications.scheduleLocalNotificationAsync({
-          title: collectSchedule.type,
-          body: collectSchedule.frequency
-        })))
-  }
-
   render() {
     return (
       <Container>
@@ -139,9 +126,4 @@ class Walkthrough extends Component {
   }
 }
 
-const mapStateToProps = ({collectSchedule}) => {
-  const { allCollectSchedules } = collectSchedule
-  return { allCollectSchedules }
-}
-
-export default connect(mapStateToProps)(Walkthrough);
+export default Walkthrough;

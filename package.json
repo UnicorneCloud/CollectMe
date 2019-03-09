@@ -39,6 +39,7 @@
     "color": "3.1.0",
     "dayjs": "^1.8.9",
     "expo": "28.0.0",
+    "geojson-geometries-lookup": "^0.3.0",
     "jest-cli": "23.5.0",
     "lodash": "4.17.11",
     "moment": "2.22.2",

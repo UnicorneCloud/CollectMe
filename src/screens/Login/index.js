@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import { NavigationActions, StackActions } from "react-navigation";
 import { Image, ImageBackground, Platform, StatusBar } from "react-native";
+import { connect } from "react-redux";
+import { Notifications } from 'expo'
 import {
   Container,
   Content,
@@ -87,8 +89,19 @@ class LoginForm extends Component {
     );
   }
 
-  login() {
-    if (this.props.valid) {
+  async login() {
+    if(true){
+    //if (this.props.valid) {
+      //const { allCollectSchedules: { data: collectSchedules } } = this.props
+      //console.log(collectSchedules)
+      //await Notifications.cancelAllScheduledNotificationsAsync()
+      //await Promise.all(
+      //  collectSchedules.map(collectSchedule => 
+      //    Notifications.scheduleLocalNotificationAsync({
+      //      title: collectSchedule.type,
+      //      body: collectSchedule.frequency
+      //    })))
+
       this.props.navigation.navigate("Walkthrough");
       return this.props.navigation.dispatch(
         StackActions.reset({
@@ -137,7 +150,7 @@ class LoginForm extends Component {
                   block
                   large
                   style={styles.loginBtn}
-                  onPress={() => this.login()}
+                  onPress={async () => await this.login()}
                 >
                   <Text
                     style={
@@ -200,7 +213,12 @@ class LoginForm extends Component {
     );
   }
 }
-const Login = reduxForm({
+const mapStateToProps = ({collectSchedule}) => {
+  const { allCollectSchedules } = collectSchedule
+  return { allCollectSchedules }
+}
+
+const Login = connect(mapStateToProps)(reduxForm({
   form: "login"
-})(LoginForm);
+})(LoginForm));
 export default Login;
