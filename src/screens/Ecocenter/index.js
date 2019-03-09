@@ -49,10 +49,10 @@ class Ecocenter extends React.Component {
 
   componentDidMount = () => {
     if(this.props.location == null){
-      this.props.getLocation()
+      this.props.askLocationPermission()
     }
     const{ coords: {latitude, longitude}} = this.props.location
-    fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(latitude).toFixed(5)}&lng=${Number(longitude).toFixed(5)}&max_results=2000&search_radius=30&autoload=1`).then(res => {
+    fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(latitude).toFixed(5)}&lng=${Number(longitude).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
     res.json().then(json => {
         this.setState({ecocenters: json, isLoading: false})
       })
@@ -82,7 +82,7 @@ class Ecocenter extends React.Component {
             const {lat, lng} = json.results[0].geometry
             const formattedAddress = json.results[0].formatted
             this.setState({locationStr: formattedAddress})
-            fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(lat).toFixed(5)}&lng=${Number(lng).toFixed(5)}&max_results=2000&search_radius=30&autoload=1`).then(res => {
+            fetch(`https://www.recyclermeselectroniques.ca/qc/wp-admin/admin-ajax.php?action=store_search&lat=${Number(lat).toFixed(5)}&lng=${Number(lng).toFixed(5)}&max_results=500&search_radius=30&autoload=1`).then(res => {
               res.json().then(json => {
                   this.setState({ecocenters: json, isLoading: false})
                 })
@@ -181,7 +181,7 @@ class Ecocenter extends React.Component {
 }
 function bindAction(dispatch) {
   return {
-    getLocation: () => dispatch(getLocation())
+    askLocationPermission: () => dispatch(askLocationPermission())
   };
 }
 

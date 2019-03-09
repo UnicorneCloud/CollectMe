@@ -6,7 +6,7 @@ export {
   itemsFetchData
 } from "../screens/Home/actions";
 
-export const getLocation  = () => {
+export const askLocationPermission  = () => {
   return dispatch => {
     Permissions.askAsync(Permissions.LOCATION).then((res) => {
       if (res.status !== 'granted') {

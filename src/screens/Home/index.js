@@ -33,6 +33,8 @@ import datas from "./data.json";
 import dataHeader from './data.header.json'
 
 import styles from "./styles";
+import { askLocationPermission } from '../../actions/location';
+import { Constants } from 'expo';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
@@ -40,6 +42,13 @@ const headerLogo = require("../../../assets/header-logo.png");
 class Home extends Component {
 
   componentDidMount() {
+    if (Platform.OS === 'android' && !Constants.isDevice) {
+      this.setState({
+        errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+      });
+    } else {
+      this.props.askLocationPermission();
+    }
     this.props.fetchData(datas)
     this.props.fetchHeaderData(dataHeader)
   }
@@ -167,7 +176,8 @@ class Home extends Component {
 function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
-    fetchHeaderData: url => dispatch(itemsHeaderFetchData(url))
+    fetchHeaderData: url => dispatch(itemsHeaderFetchData(url)),
+    askLocationPermission: () => dispatch(askLocationPermission())
   };
 }
 
