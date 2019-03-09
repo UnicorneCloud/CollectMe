@@ -1,3 +1,5 @@
+const Entities = require('html-entities').AllHtmlEntities
+const entities = new Entities();
 import { WEEK_DAYS_MAP, COLLECT_PERIOD_IN_DATA, WEEK_DAYS_IN_DATA, createFrequence } from "./model";
 
 export const getFrequence = (feature) => {
@@ -61,4 +63,22 @@ export const distanceBetweenCoordinates = (a,b) => {
 
 const deg2rad = (deg) => {
   return deg * (Math.PI/180)
+}
+
+export const ecocenterMarkers = (ecocenters) => {
+  return ecocenters.filter(e => e.lat != null && e.lng != null && e.lat != "" && e.lng != "").map(e => ({
+    coord: {
+      latitude: Number(e.lat) || 0,
+      longitude: Number(e.lng) || 0
+    },
+    title: entities.decode(e.store),
+    description: entities.decode(e.description).replace(/<(?:.|\n)*?>/gm, '')
+  }))
+}
+
+export const geoJsonToCoord = (geojson) => {
+  return {
+    latitude: geojson.coordinates[1] || 0,
+    longitude: geojson.coordinates[0] || 0
+  }
 }

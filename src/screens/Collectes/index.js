@@ -21,7 +21,6 @@ import { getUpcomingCollectDates } from '../../utils/model'
 class Collectes extends Component {
   render() {
     const { navigation, allCollectSchedules: { data: collectSchedules } } = this.props
-    console.log(collectSchedules)
 
     let nextCollects = []
 
@@ -39,7 +38,6 @@ class Collectes extends Component {
       nextCollects = nextCollects.concat(test)
     }
 
-    console.log("nextCollects", nextCollects)
     nextCollects.sort((a, b) => a.collectDate - b.collectDate)
 
     return (

@@ -1,4 +1,4 @@
-import {WEEK_DAYS, createFrequence, upcomingCollectDates, getUpcomingCollectDates } from '../model';
+import { WEEK_DAYS, createFrequence, upcomingCollectDates, getUpcomingCollectDates } from '../model';
 
 const EXPECTED_FREQUENCE = new Map([
   ["days", new Set(WEEK_DAYS)],
@@ -26,7 +26,7 @@ describe("When creating the frequence", () => {
 });
 
 
-describe('upcomingCollectDates', () => {
+describe('upcomingCollectDates', () => {
   it('should not crash', () => {
     const collectSchedule = {
       startDate: new Date(2019, 3, 9),
@@ -35,10 +35,19 @@ describe('upcomingCollectDates', () => {
     }
     const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
     expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
   })
 })
 
-describe('getUpcomingCollectDates', () => {
+describe('getUpcomingCollectDates', () => {
   it('should not crash', () => {
     const collectSchedule = {
       startDate: new Date(2019, 3, 9),
@@ -46,7 +55,6 @@ describe('getUpcomingCollectDates', () => {
       period: 2
     }
     const result = getUpcomingCollectDates(collectSchedule, 14)
-    console.log(result)
     expect(result).toHaveLength(14)
   })
 })

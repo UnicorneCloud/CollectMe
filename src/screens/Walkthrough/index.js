@@ -11,9 +11,8 @@ import styles from "./styles";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 
-import { Permissions, Notifications } from 'expo'
+import { Permissions, Notifications, Constants } from 'expo'
 import { askLocationPermission } from '../../actions/location';
-import Constants from "expo/src/Constants";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -64,7 +63,7 @@ async function registerForPushNotificationsAsync() {
   }).catch((error) => {
     console.log(error)
   })
-  
+
 
   // POST the token to your backend server from where you can retrieve it to send push notifications.
   // return fetch(PUSH_ENDPOINT, {
@@ -91,7 +90,7 @@ class Walkthrough extends Component {
       tips: DATA,
     };
   }
-  
+
   componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
@@ -105,7 +104,7 @@ class Walkthrough extends Component {
 
   render() {
     const tipsTemp = this.state.tips
-    const tips = (tipsTemp.length>0) ? [tipsTemp[getRandomInt(0, tipsTemp.length-1)]] : []
+    const tips = (tipsTemp.length > 0) ? [tipsTemp[getRandomInt(0, tipsTemp.length - 1)]] : []
 
     return (
       <Container>
@@ -122,37 +121,37 @@ class Walkthrough extends Component {
             animate={false} >
 
             {tips.map((tip, index) => {
-                return (
-                  <View key={index} style={styles.slides}>
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.apaginationText
-                          : styles.iospaginationText
-                      } >
-                      <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
-                      <Text style={styles.titleText}> Astuce verte!</Text>
-                    </Text>
-                    {tip.icon}
-                    <Text
-                      numberOfLines={2}
-                      style={
-                        Platform.OS === "android" ? styles.aText : styles.iosText
-                      }>
-                      {tip.headline}
-                    </Text>
-                    <Button
-                      transparent
-                      rounded
-                      onPress={() => this.props.navigation.navigate("Drawer")}
-                      style={styles.Button} >
-                      <Text style={{ color: "#FFF", fontWeight: "600" }}>
-                        Continuer
+              return (
+                <View key={index} style={styles.slides}>
+                  <Text
+                    style={
+                      Platform.OS === "android"
+                        ? styles.apaginationText
+                        : styles.iospaginationText
+                    } >
+                    <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
+                    <Text style={styles.titleText}> Astuce verte!</Text>
+                  </Text>
+                  {tip.icon}
+                  <Text
+                    numberOfLines={2}
+                    style={
+                      Platform.OS === "android" ? styles.aText : styles.iosText
+                    }>
+                    {tip.headline}
+                  </Text>
+                  <Button
+                    transparent
+                    rounded
+                    onPress={() => this.props.navigation.navigate("Drawer")}
+                    style={styles.Button} >
+                    <Text style={{ color: "#FFF", fontWeight: "600" }}>
+                      Continuer
                       </Text>
-                    </Button>
-                  </View>
-                )
-              })
+                  </Button>
+                </View>
+              )
+            })
             }
           </Carousel>
         </Content>

@@ -82,7 +82,7 @@ class SideBar extends Component {
               style={styles.links}
             >
               <Icon name="ios-calendar-outline" />
-              <Text style={styles.linkText}>CALENDAR</Text>
+              <Text style={styles.linkText}>CALENDRIER</Text>
             </ListItem>
             <ListItem
               button
@@ -94,6 +94,17 @@ class SideBar extends Component {
             >
               <Icon name="ios-timer-outline" />
               <Text style={styles.linkText}>COLLECTES</Text>
+            </ListItem>
+            <ListItem
+              button
+              onPress={() => {
+                navigation.navigate("MapScreen");
+              }}
+              iconLeft
+              style={styles.links}
+            >
+              <Icon name="ios-timer-outline" />
+              <Text style={styles.linkText}>MAP</Text>
             </ListItem>
             {/*<ListItem*/}
               {/*button*/}

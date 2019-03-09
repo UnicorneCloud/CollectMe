@@ -23,7 +23,7 @@ import {
   View,
   Spinner
 } from "native-base";
-import { Notifications, Constants } from 'expo'
+import { Permissions, Notifications, Constants } from 'expo'
 import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
 
@@ -31,40 +31,65 @@ import styles from "./styles";
 import { setAllCollectSchedules } from '../../actions'
 import { itemsFetchData, itemsHeaderFetchData } from "./actions"
 import { getCollectScheduleData, getUpcomingCollectDates } from '../../utils/model'
-import { askLocationPermission } from '../../actions/location';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
 
 class Home extends Component {
-  componentDidMount() {
+  async componentDidMount() {
     this.props.fetchData()
     this.props.fetchHeaderData()
+
+    const result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+
+    if (Constants.isDevice && result.status === 'granted') {
+      console.log("Notification permissions granted.")
+    }
   }
 
   async resetScheduledNotifications(collectSchedules) {
-    //await Notifications.cancelAllScheduledNotificationsAsync()
-    //await Promise.all(Object.keys(collectSchedules)
-    //  .map(collectType => {
-    //    const collectSchedule = collectSchedules[collectType]
-    //    console.log(collectSchedule)
-    //    const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
-    //    console.log(dates)
-    //    return dates.map(date => 
-    //       Notifications.scheduleLocalNotificationAsync({
-    //        title: collectType.charAt(0).toUpperCase() + collectType.slice(1),
-    //        body: 'La collecte de ' + collectType + ' est demain matin.'
-    //      },
-    //      {
-    //        time: date.subtract(1, 'day').set('hour', 18).toDate()
-    //      })
-    //    )
-    //  }).flat())
+    await Notifications.cancelAllScheduledNotificationsAsync()
+    await Notifications.scheduleLocalNotificationAsync({
+      title: 'Déchets',
+      body: 'La collecte de déchets est demain matin.'
+    },
+      {
+        time: (new Date()).getTime() + 1000,
+      })
+
+    await Promise.all(Object.keys(collectSchedules)
+      .map(collectType => {
+        const collectSchedule = collectSchedules[collectType]
+        const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.daysInt.length * collectSchedule.period)
+        const promises = dates.map(date => {
+          const name = collectType === 'garbage' ? 'déchets' : 'garbage'
+          return [
+            Notifications.scheduleLocalNotificationAsync({
+              title: name.charAt(0).toUpperCase() + name.slice(1),
+              body: 'La collecte de ' + name + ' est demain matin.'
+            },
+              {
+                time: date.subtract(1, 'day').set('hour', 18).toDate(),
+                repeat: 'month'
+              }),
+            Notifications.scheduleLocalNotificationAsync({
+              title: name.charAt(0).toUpperCase() + name.slice(1),
+              body: 'La collecte de ' + name + ' est ce matin.'
+            },
+              {
+                time: date.set('hour', 7).toDate(),
+                repeat: 'month'
+              })
+          ]
+        }).flat()
+        return promises
+      }).flat())
+
   }
 
   async componentDidUpdate(prevProps, prevState) {
     const { location } = this.props
-    if (prevProps.location !== location) {
+    if (true) {
       const collectSchedules = getCollectScheduleData(location)
       this.props.setAllCollectSchedules(collectSchedules)
       await this.resetScheduledNotifications(collectSchedules)
