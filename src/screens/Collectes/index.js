@@ -41,7 +41,7 @@ class Collectes extends Component {
               <Grid>
                 <Col style={{ flexDirection: "row" }}>
                   <Icon
-                    name="ios-trash"
+                    name="fa-trash-alt"
                     style={{ color: "#999", marginLeft: 2 }}
                   />
                   <View style={{ paddingLeft: 15 }}>
@@ -77,7 +77,7 @@ class Collectes extends Component {
               <Grid>
                 <Col style={{ flexDirection: "row" }}>
                   <Icon
-                    name="ios-trash"
+                    name="fa-recycle"
                     style={styles.timelineIcon}
                   />
                   <View style={{ paddingLeft: 10 }}>
