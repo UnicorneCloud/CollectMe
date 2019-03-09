@@ -22,8 +22,8 @@ export default function(state: any = initialState, action: Function) {
       return {
         ...state, 
         allCollectSchedules: {
-            ...state.allCollectSchedules,
-            data: action.collectSchedules
+          ...state.allCollectSchedules,
+          data: action.collectSchedules
         }};
     default:
       return state;
