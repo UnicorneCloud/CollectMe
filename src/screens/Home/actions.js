@@ -19,8 +19,15 @@ export function itemsFetchDataSuccess(items: Object) {
 }
 export function itemsFetchData(url: any) {
   return dispatch => {
-    dispatch(itemsFetchDataSuccess((url: any)));
-    dispatch(itemsIsLoading(false));
+    console.log('fetch data')
+    fetch('https://s3.ca-central-1.amazonaws.com/colectme/data/data.json').then(res => {
+      res.json().then(json => {
+        dispatch(itemsFetchDataSuccess(json));
+        dispatch(itemsIsLoading(false));
+      })
+    }).catch(error => {
+      console.log('Error: ' + error)
+    });
   };
 }
 export function itemsHeaderFetchDataSuccess(itemsHeader: Object) {
@@ -31,7 +38,14 @@ export function itemsHeaderFetchDataSuccess(itemsHeader: Object) {
 }
 export function itemsHeaderFetchData(url: any) {
   return dispatch => {
-    dispatch(itemsHeaderFetchDataSuccess((url: any)));
-    dispatch(itemsIsLoading(false));
+    console.log('fetch data header')
+    fetch('https://s3.ca-central-1.amazonaws.com/colectme/data/data.header.json').then(res => {
+      res.json().then(json => {
+        dispatch(itemsHeaderFetchDataSuccess(json));
+        dispatch(itemsIsLoading(false));
+      })
+    }).catch(error => {
+      console.log('Error: ' + error)
+    });
   };
 }

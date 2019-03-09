@@ -21,6 +21,7 @@ import styles from "./styles";
 const headerLogo = require("../../../assets/header-logo.png");
 const primary = require("../../theme/variables/commonColor").brandPrimary;
 
+
 class Channel extends Component {
   render() {
     const navigation = this.props.navigation;

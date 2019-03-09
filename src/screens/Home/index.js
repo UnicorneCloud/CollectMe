@@ -29,9 +29,6 @@ import Carousel from "react-native-carousel-view";
 
 import { itemsFetchData, itemsHeaderFetchData } from "./actions";
 
-import datas from "./data.json"
-import dataHeader from './data.header.json'
-
 import styles from "./styles";
 import { askLocationPermission } from '../../actions/location';
 import { Constants } from 'expo';
@@ -49,8 +46,8 @@ class Home extends Component {
     } else {
       this.props.askLocationPermission();
     }
-    this.props.fetchData(datas)
-    this.props.fetchHeaderData(dataHeader)
+    this.props.fetchData()
+    this.props.fetchHeaderData()
   }
 
   _renderItem = ({ item }) => {
