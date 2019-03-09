@@ -15,11 +15,11 @@ import 'dayjs/locale/fr'
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 dayjs.locale('fr') // use French locale globally
 
-const dechetsJson = require('../../../data/dechets.json');
 
 class Collectes extends Component {
   render() {
-    const navigation = this.props.navigation;
+    const { navigation, allCollectSchedules: { data: collectSchedules } } = this.props
+    console.log(collectSchedules)
 
     return (
       <Container style={styles.bg}>
@@ -108,4 +108,9 @@ class Collectes extends Component {
   }
 }
 
-export default connect()(Collectes);
+const mapStateToProps = ({ collectSchedule }) => {
+  const { allCollectSchedules } = collectSchedule
+  return { allCollectSchedules }
+}
+
+export default connect(mapStateToProps)(Collectes);

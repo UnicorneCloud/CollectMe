@@ -38,7 +38,18 @@ class SideBar extends Component {
               style={styles.links}
             >
               <Icon name="ios-grid-outline" />
-              <Text style={styles.linkText}>ZÉRO DÉCHET</Text>
+              <Text style={styles.linkText}>ARTICLES</Text>
+            </ListItem>
+            <ListItem
+              button
+              onPress={() => {
+                navigation.navigate("Channels");
+              }}
+              iconLeft
+              style={styles.links}
+            >
+              <Icon name="ios-keypad-outline" />
+              <Text style={styles.linkText}>SUJETS</Text>
             </ListItem>
             <ListItem
               button
@@ -50,17 +61,6 @@ class SideBar extends Component {
             >
               <Icon name="ios-trash" />
               <Text style={styles.linkText}>TROUVER UN ÉCOCENTRE</Text>
-            </ListItem>
-            <ListItem
-              button
-              onPress={() => {
-                navigation.navigate("Channels");
-              }}
-              iconLeft
-              style={styles.links}
-            >
-              <Icon name="ios-keypad-outline" />
-              <Text style={styles.linkText}>CHANNELS</Text>
             </ListItem>
             <ListItem
               button

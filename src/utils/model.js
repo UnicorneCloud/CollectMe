@@ -1,3 +1,6 @@
+import { getFrequence } from '../utils/GeoUtils'
+import GeoJsonGeometriesLookup from 'geojson-geometries-lookup'
+
 export const WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 export const WEEK_DAYS_MAP = {
@@ -26,7 +29,7 @@ export const WEEK_DAYS_IN_DATA = {
 };
 
 export const COLLECT_TYPES = {
-  TRASH: 'Trash',
+  GARBAGE: 'Garbage',
   RECYCLING: 'Recycling'
 }
 
@@ -37,10 +40,21 @@ export const createFrequence = (iterableOfDay, everyXWeek) => {
   };
 };
 
-
-export const createCollectSchedule = (frequency, type) => {
-  return {
-    type,
-    frequency
-  }
+export const getCollectScheduleData = (location) => {
+  location.latitude = 46.8115809
+  location.longitude = -71.2335447
+  const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
+  const collectScheduleDataByType = [
+    [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')], 
+    [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')]
+  ]
+  return collectScheduleDataByType.reduce((result, [key, data]) => {
+    const glookup = new GeoJsonGeometriesLookup(data);
+    const container = glookup.getContainers(locationPoint);
+    if(container.features.length > 0){
+      const frequency = getFrequence(container.features[0])
+      result[key] = frequency
+    }
+    return result
+  }, {})
 }

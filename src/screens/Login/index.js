@@ -90,17 +90,8 @@ class LoginForm extends Component {
   }
 
   async login() {
-    if(true){
-    //if (this.props.valid) {
-      //const { allCollectSchedules: { data: collectSchedules } } = this.props
-      //console.log(collectSchedules)
-      //await Notifications.cancelAllScheduledNotificationsAsync()
-      //await Promise.all(
-      //  collectSchedules.map(collectSchedule => 
-      //    Notifications.scheduleLocalNotificationAsync({
-      //      title: collectSchedule.type,
-      //      body: collectSchedule.frequency
-      //    })))
+    if (this.props.valid) {
+      
 
       this.props.navigation.navigate("Walkthrough");
       return this.props.navigation.dispatch(

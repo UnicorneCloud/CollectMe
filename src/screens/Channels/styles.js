@@ -26,8 +26,8 @@ export default {
   },
   na: {},
   channelImg: {
-    height: deviceHeight / 4 + 10,
-    width: deviceWidth / 2 + 2
+    height: deviceHeight / 3 + 10,
+    width: deviceWidth / 1 + 2
   },
   ioschannelImgText: {
     fontSize: 12,
