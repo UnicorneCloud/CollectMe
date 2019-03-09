@@ -86,7 +86,7 @@ export function* upcomingCollectDates (collectSchedule) {
   const startDate = dayjs(collectSchedule.startDate)
   const weeksSinceCollectStart = now.diff(startDate, 'week')
   const weeksSinceLastCollect = weeksSinceCollectStart % collectSchedule.period
-  const weeksUntilNextCollect = period - weeksSinceLastCollect
+  const weeksUntilNextCollect = collectSchedule.period - weeksSinceLastCollect
   let nextCollectDay = now.add(weeksUntilNextCollect, 'week').set('day', 0)
 
   while(true){
