@@ -44,7 +44,7 @@ export default {
     fontWeight: "900"
   },
   newsPosterLink: {
-    opacity: 0.8,
+    opacity: 0.9,
     fontSize: 12,
     alignSelf: "flex-start",
     fontWeight: "bold"
@@ -55,10 +55,10 @@ export default {
     alignSelf: "flex-end"
   },
   newsPosterTypeText: {
-    opacity: 0.8,
+    opacity: 0.9,
     fontSize: 12,
     fontWeight: "bold",
-    paddingBottom: 2
+    paddingBottom: 2,
   },
   timeIcon: {
     fontSize: 20,
@@ -84,8 +84,10 @@ export default {
   },
   swiperTextContent: {
     position: "absolute",
+    width: "100%",
     bottom: -5,
-    padding: 20
+    padding: 20,
+    backgroundColor: "rgba(0,0,0,.7)"
   },
   swiperDot: {
     backgroundColor: "rgba(0,0,0,.8)",

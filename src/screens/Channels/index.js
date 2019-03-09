@@ -45,7 +45,7 @@ class Channels extends Component {
           <Tab
             heading={
               <TabHeading>
-                <Text>Following</Text>
+                <Text>Zéro Déchet</Text>
               </TabHeading>
             }
           >
@@ -54,13 +54,13 @@ class Channels extends Component {
           <Tab
             heading={
               <TabHeading>
-                <Text>Popular</Text>
+                <Text>Compost</Text>
               </TabHeading>
             }
           >
             <TabTwo navigation={this.props.navigation} />
           </Tab>
-          <Tab
+          {/* <Tab
             heading={
               <TabHeading>
                 <Text>Explore</Text>
@@ -68,7 +68,7 @@ class Channels extends Component {
             }
           >
             <TabThree navigation={this.props.navigation} />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </Container>
     );

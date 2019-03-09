@@ -14,6 +14,16 @@ export const WEEK_DAYS_MAP = {
   SUNDAY: "Sunday"
 };
 
+export const WEEK_DAYS_INT_MAP = {
+  "Monday": 1,
+  "Tuesday": 2,
+  "Wednesday": 3,
+  "Thursday": 4,
+  "Friday": 5,
+  "Saturday": 6,
+  "Sunday": 0
+};
+
 export const COLLECT_PERIOD_IN_DATA = {
   SEMAINE: "chaque semaine",
   BIMENSUEL: "chaque 2 semaines"
@@ -34,9 +44,14 @@ export const COLLECT_TYPES = {
   RECYCLING: 'recyclage'
 }
 
-export const createFrequence = (iterableOfDay, everyXWeek) => {
+export const createFrequence = (iterableOfDay, everyXWeek, startDate, endDate) => {
+  days = new Set(iterableOfDay)
+  daysInt = iterableOfDay.map(x => WEEK_DAYS_INT_MAP[x]) // 0 = sunday
   return {
-    days: new Set(iterableOfDay),
+    days: days,
+    daysInt: daysInt,
+    startDate:  startDate,
+    endDate: endDate,
     period: everyXWeek
   };
 };
