@@ -1,4 +1,5 @@
 export const getFrequence = (feature) => {
+
   return true;
 };
 
