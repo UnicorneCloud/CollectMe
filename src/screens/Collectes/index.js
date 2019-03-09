@@ -12,6 +12,7 @@ import styles from "./styles";
 import dayjs from 'dayjs';
 
 import 'dayjs/locale/fr'
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 dayjs.locale('fr') // use French locale globally
 
 const dechetsJson = require('../../../data/dechets.json');
@@ -76,8 +77,8 @@ class Collectes extends Component {
             <View style={styles.contentContainer}>
               <Grid>
                 <Col style={{ flexDirection: "row" }}>
-                  <Icon
-                    name="ios-trash"
+                  <FontAwesome
+                    name="recycle"
                     style={styles.timelineIcon}
                   />
                   <View style={{ paddingLeft: 10 }}>

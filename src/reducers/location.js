@@ -1,5 +1,6 @@
 const initialState = {
-  location: null
+  location: null,
+  
 };
 export default function(state: any = initialState, action: Function) {
   switch (action.type) {
