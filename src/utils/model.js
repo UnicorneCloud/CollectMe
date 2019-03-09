@@ -1,4 +1,4 @@
-import GeoJsonGeometriesLookup from 'geojson-geometries-lookup'
+import GeoJsonGeometriesLookup from 'geojson-geometries-lookup'
 import dayjs from 'dayjs'
 
 import { getFrequence } from '../utils/GeoUtils'
@@ -40,7 +40,7 @@ export const WEEK_DAYS_IN_DATA = {
 };
 
 export const COLLECT_TYPES = {
-  GARBAGE: 'déchets',
+  GARBAGE: 'garbage',
   RECYCLING: 'recyclage'
 }
 
@@ -50,7 +50,7 @@ export const createFrequence = (iterableOfDay, everyXWeek, startDate, endDate) =
   return {
     days: days,
     daysInt: daysInt,
-    startDate:  startDate,
+    startDate: startDate,
     endDate: endDate,
     period: everyXWeek
   };
@@ -61,13 +61,13 @@ export const getCollectScheduleData = (location) => {
   location.longitude = -71.348191
   const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
   const collectScheduleDataByType = [
-    [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')], 
+    [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')],
     [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')]
   ]
   return collectScheduleDataByType.reduce((result, [key, data]) => {
     const glookup = new GeoJsonGeometriesLookup(data);
     const container = glookup.getContainers(locationPoint);
-    if(container.features.length > 0){
+    if (container.features.length > 0) {
       const frequency = getFrequence(container.features[0])
       result[key] = frequency
     }
@@ -81,7 +81,7 @@ export const getCollectScheduleData = (location) => {
  * @returns Next collect days generator
  * }
  */
-export function* upcomingCollectDates (collectSchedule) {
+export function* upcomingCollectDates(collectSchedule) {
   const now = dayjs()
   const startDate = dayjs(collectSchedule.startDate)
   const weeksSinceCollectStart = now.diff(startDate, 'week')
@@ -89,19 +89,19 @@ export function* upcomingCollectDates (collectSchedule) {
   const weeksUntilNextCollect = collectSchedule.period - weeksSinceLastCollect
   let nextCollectDay = now.add(weeksUntilNextCollect, 'week').set('day', 0)
 
-  while(true){
-    for(const day of collectSchedule.days){
+  while (true) {
+    for (const day in collectSchedule.daysInt) {
       nextCollectDay = nextCollectDay.set('day', day)
       yield nextCollectDay
     }
-    nextCollectDay.add(collectSchedule.period, 'week')
+    nextCollectDay = nextCollectDay.add(collectSchedule.period, 'week')
   }
 }
 
 export const getUpcomingCollectDates = (collectSchedule, count) => {
   const dates = []
   const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
-  for(let i=0; i<count; ++i){
+  for (let i = 0; i < count; ++i) {
     dates.push(upcomingCollectDatesGenerator.next().value)
   }
   return dates
