@@ -1,4 +1,4 @@
-import getFrequence from '../GeoUtils';
+import { getFrequence } from '../GeoUtils';
 
 const FEATURE_OBJECT = {
   "type" : "Feature",
