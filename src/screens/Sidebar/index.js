@@ -82,7 +82,7 @@ class SideBar extends Component {
               style={styles.links}
             >
               <Icon name="ios-calendar-outline" />
-              <Text style={styles.linkText}>CALENDAR</Text>
+              <Text style={styles.linkText}>CALENDRIER</Text>
             </ListItem>
             <ListItem
               button
