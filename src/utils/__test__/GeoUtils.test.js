@@ -658,6 +658,14 @@ const FEATURE_OBJECT = {
   }
 };
 
+describe("when testing", () => {
+  describe("in a hackathon", () => {
+    beforeEach(() => {
+      
+    })
+  });
+});
+
 test('ez', () => {
   expect(getFrequence(FEATURE_OBJECT)).toBeTruthy();
 });
