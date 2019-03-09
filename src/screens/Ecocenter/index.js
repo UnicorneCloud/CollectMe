@@ -85,7 +85,7 @@ class Ecocenter extends Component {
       android: `${scheme}${latLng}(${label})`
     });
     Linking.openURL(url);
-  }
+  };
 
   _renderItem = ({ item }) => {
     if(item.properties && item.properties["NOM_TOPOGRAPHIE"]){
@@ -207,7 +207,7 @@ class Ecocenter extends Component {
         <FlatList
           data={[...ecocenterData, ...ecocenters]}
           renderItem={this._renderItem}
-          keyExtractor={item => item.lat + item.lng}/>
+          keyExtractor={(item, index) => index}/>
           </MenuProvider>
       </View>
       </Container>
