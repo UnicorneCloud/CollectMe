@@ -41,8 +41,8 @@ class Home extends Component {
     this.props.fetchData()
     this.props.fetchHeaderData()
   }
-  
-  async resetScheduledNotifications(collectSchedules){
+
+  async resetScheduledNotifications(collectSchedules) {
     //await Notifications.cancelAllScheduledNotificationsAsync()
     //await Promise.all(Object.keys(collectSchedules)
     //  .map(collectType => {
@@ -61,21 +61,21 @@ class Home extends Component {
     //    )
     //  }).flat())
   }
-  
-  async componentDidUpdate(prevProps, prevState){
+
+  async componentDidUpdate(prevProps, prevState) {
     const { location } = this.props
-    if(prevProps.location !== location){
+    if (prevProps.location !== location) {
       const collectSchedules = getCollectScheduleData(location)
       this.props.setAllCollectSchedules(collectSchedules)
       await this.resetScheduledNotifications(collectSchedules)
     }
   }
-  
+
   _renderItem = ({ item }) => {
     return (
       <TouchableOpacity
         style={{ flexDirection: "row" }}
-        onPress={() => this.props.navigation.navigate("Story", {id: item.id})}
+        onPress={() => this.props.navigation.navigate("Story", { id: item.id })}
       >
         <View style={styles.newsContent}>
           <Text numberOfLines={2} style={styles.newsHeader}>
@@ -94,7 +94,7 @@ class Home extends Component {
             <Col>
               <TouchableOpacity
                 style={styles.newsTypeView}
-                onPress={() => this.props.navigation.navigate("Story", {id: item.id})} >
+                onPress={() => this.props.navigation.navigate("Story", { id: item.id })} >
                 <Text style={styles.newsTypeText}>
                   {item.category}
                 </Text>
@@ -141,11 +141,11 @@ class Home extends Component {
                       <RNView key={index}>
                         <TouchableOpacity
                           activeOpacity={1}
-                          onPress={() => this.props.navigation.navigate("Story",{id: item.id})}
+                          onPress={() => this.props.navigation.navigate("Story", { id: item.id })}
                           style={styles.slide} >
                           <ImageBackground
                             style={styles.newsPoster}
-                            source={{uri:item.imageUri}} >
+                            source={{ uri: item.imageUri }} >
                             <View style={styles.swiperTextContent}>
                               <Text numberOfLines={2} style={styles.newsPosterHeader} >
                                 {item.headline}
@@ -162,7 +162,7 @@ class Home extends Component {
                                   <TouchableOpacity style={styles.newsPosterTypeView} >
                                     <Text
                                       style={styles.newsPosterTypeText}
-                                      onPress={() => this.props.navigation.navigate("Channel",{category: item.category})} >
+                                      onPress={() => this.props.navigation.navigate("Channel", { category: item.category })} >
                                       {item.category}
                                     </Text>
                                   </TouchableOpacity>

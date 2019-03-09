@@ -15,80 +15,45 @@ import 'dayjs/locale/fr'
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 dayjs.locale('fr') // use French locale globally
 
+import { getUpcomingCollectDates } from '../../utils/model'
+
 
 class Collectes extends Component {
   render() {
     const { navigation, allCollectSchedules: { data: collectSchedules } } = this.props
     console.log(collectSchedules)
 
+    let nextCollects = []
 
-    const getNext14DaysCollect = (schedule) => {
-      const nextCollects = [];
+    for (var scheduleType in collectSchedules) {
+      const schedule = collectSchedules[scheduleType]
 
-      const currentDay = dayjs().day();
-      console.log("currentDay", currentDay)
+      const test = getUpcomingCollectDates(schedule, 14 / schedule.period).map(upcomingDate => {
+        return {
+          "collectType": scheduleType,
+          "collectPeriod": schedule.period,
+          "collectDate": upcomingDate
+        }
+      })
 
-      const targetDay = 5;
-
-      let nextCollect = dayjs().set('day', targetDay)
-
-      console.log("nextCollect-before", nextCollect.format("YYYY-MM-DD"))
-
-      if (targetDay < currentDay) {
-        nextCollect = nextCollect.add(1, 'week')
-      }
-      nextCollects.push(nextCollect);
-
-      if (schedule.period === 1) {
-
-      }
-
-      return nextCollects;
+      nextCollects = nextCollects.concat(test)
     }
 
-    const nextCollects = [
-      {
-        "collectType": "Garbage",
-        "collectPeriod": 1,
-        "collectDate": dayjs()
-      },
-      {
-        "collectType": "Garbage",
-        "collectPeriod": 1,
-        "collectDate": dayjs()
-      },
-      {
-        "collectType": "Recycling",
-        "collectPeriod": 2,
-        "collectDate": dayjs()
-      }
-    ];
-
-    // for (var scheduleType in collectSchedules) {
-    //   console.log("scheduleType", scheduleType)
-
-    //   const schedule = collectSchedules[scheduleType]
-    //   console.log("schedule", schedule)
-
-    //   const nextCollectForSpecificType = getNext14DaysCollect(schedule);
-
-    //   console.log("==========================")
-    //   console.log("nextCollectForSpecificType", nextCollectForSpecificType)
-    // }
-
+    console.log("nextCollects", nextCollects)
+    nextCollects.sort((a, b) => a.collectDate - b.collectDate)
 
     return (
       <Container style={styles.bg}>
         <CustomHeader hasTabs={true} navigation={navigation} />
         <View style={styles.overviewHeaderContainer}>
-          <Text style={styles.overviewHeader}>{dayjs().format('dddd')}</Text>
-          <Text note style={styles.overviewHead}>{dayjs().format('DD MMMM YYYY')}</Text>
+          <Text style={styles.overviewHeader}>Prévision 14 jours</Text>
+          <Text note style={styles.overviewHead}>{`${dayjs().format('D MMMM YYYY')} - ${dayjs().add(14, 'day').format('D MMMM YYYY')}`}</Text>
         </View>
 
         <Content showsVerticalScrollIndicator={false}>
 
-          {nextCollects.map(collect =>
-            <View>
+          {nextCollects.map((collect, i) =>
+            <View key={i}>
               <View style={styles.timelineView}>
                 <View style={styles.timelineContent}>
                   <Text />
@@ -98,7 +63,7 @@ class Collectes extends Component {
                 <Grid>
                   <Col style={{ flexDirection: "row" }}>
                     {
-                      collect.collectType == "Garbage" ?
+                      collect.collectType == "garbage" ?
                         <Icon
                           name="ios-trash"
                           style={{ color: "#999", marginLeft: 2 }}
@@ -110,7 +75,7 @@ class Collectes extends Component {
                     }
                     <View style={{ paddingLeft: 15 }}>
                       <Text style={styles.timelineContentHeading}>
-                        {`Collectes ${collect.collectType == "Garbage" ? "des déchets" : " du recyclage"}`}
+                        {`Collectes ${collect.collectType == "garbage" ? "des déchets" : " du recyclage"}`}
                       </Text>
                     </View>
                   </Col>
