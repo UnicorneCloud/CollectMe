@@ -23,18 +23,15 @@ import {
   View,
   Spinner
 } from "native-base";
-import { Notifications } from 'expo'
+import { Notifications, Constants } from 'expo'
 import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
+
+import styles from "./styles";
 import { setAllCollectSchedules } from '../../actions'
 import { itemsFetchData, itemsHeaderFetchData } from "./actions"
 import { getCollectScheduleData } from '../../utils/model'
-import datas from "./data.json"
-import dataHeader from './data.header.json'
-
-import styles from "./styles";
 import { askLocationPermission } from '../../actions/location';
-import { Constants } from 'expo';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
@@ -48,8 +45,8 @@ class Home extends Component {
     } else {
       this.props.askLocationPermission();
     }
-    this.props.fetchData(datas)
-    this.props.fetchHeaderData(dataHeader)
+    this.props.fetchData()
+    this.props.fetchHeaderData()
   }
   
   async resetScheduledNotifications(collectSchedules){

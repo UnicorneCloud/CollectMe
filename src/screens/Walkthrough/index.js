@@ -9,6 +9,7 @@ import { tipsFetch } from "../../actions";
 import datas from "./data.json"
 
 import styles from "./styles";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -61,7 +62,8 @@ class Walkthrough extends Component {
                           ? styles.apaginationText
                           : styles.iospaginationText
                       } >
-                    Astuces
+                      <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
+                      <Text style={styles.titleText}> Astuce verte!</Text>
                     </Text>
                     <Icon name="md-bulb" style={styles.imageIcons} />
                     <Text

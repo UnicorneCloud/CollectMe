@@ -10,27 +10,105 @@
 			}
 		},
 		"headline": "Journée Normand Maurice",
+		"url": "http://ecoles.csbf.qc.ca/leboise/solidarite/JourneeNormandMaurice/JNM.html",
 		"time": "17 mars",
+		"category": "ENVIRONNEMENT",
 		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/normand.png"
 	},
 	{
 		"id": 1,
 		"dates": {
-			"2019-03-23": {
+			"2019-08-01": {
+				"color": "red",
+				"textColor": "#ffffff",
+				"startingDay": true,
+				"endingDay": true
+			}
+		},
+		"headline": "Le jour du dépassement",
+		"url": "https://fr.wikipedia.org/wiki/Jour_du_d%C3%A9passement",
+		"time": "1 août",
+		"category": "ENVIRONNEMENT",
+		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/planete.png"
+	},
+	{
+		"id": 2,
+		"dates": {
+			"2019-04-22": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": true,
+				"endingDay": true
+			}
+		},
+		"headline": "Jour de la terre",
+		"url": "https://www.jourdelaterre.org",
+		"time": "22 avril",
+		"category": "ENVIRONNEMENT",
+		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/terre.png"
+	},
+	{
+		"id": 3,
+		"dates": {
+			"2019-10-20": {
 				"color": "orange",
 				"textColor": "#ffffff",
 				"startingDay": true,
 				"endingDay": false
 			},
-			"2019-03-24": {
+			"2019-10-21": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-22": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-23": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-24": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-25": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-26": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-27": {
+				"color": "orange",
+				"textColor": "#ffffff",
+				"startingDay": false,
+				"endingDay": false
+			},
+			"2019-10-28": {
 				"color": "orange",
 				"textColor": "#ffffff",
 				"startingDay": false,
 				"endingDay": true
 			}
 		},
-		"headline": "La fin de semaine zéro déchet",
-		"time": "23-24 mars",
-		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/zero.png"
+		"headline": "La semaine québécoise de réduction de déchets",
+		"url": "https://sqrd.org/",
+		"time": "20 au 28 octobre",
+		"category": "ZERO DÉCHET",
+		"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/sqrd.png"
 	}
 ]

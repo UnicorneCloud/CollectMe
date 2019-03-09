@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from "react";
-import { Image, TouchableOpacity } from "react-native";
+import { Image, TouchableOpacity, Linking } from "react-native";
 import {
   Container,
   Header,
@@ -59,6 +59,8 @@ class Calendar extends Component {
       eventDates = { ...eventDates, ...d.dates }
     });
 
+    events.sort((a, b) => new Date(Object.keys(a.dates)[0]) - new Date(Object.keys(b.dates)[0]))
+
     const navigation = this.props.navigation;
 
     return (
@@ -111,6 +113,7 @@ class Calendar extends Component {
               <TouchableOpacity
                 key={event.id}
                 style={{ flexDirection: "row" }}
+                onPress={() => Linking.openURL(event.url)}
               >
                 <Image
                   source={{ uri: event.imageUri }}
@@ -129,7 +132,7 @@ class Calendar extends Component {
                       <TouchableOpacity
                         style={styles.newsTypeView}
                       >
-                        <Text style={styles.newsTypeText}>ENVIRONNEMENT</Text>
+                        <Text style={styles.newsTypeText}>{event.category}</Text>
                       </TouchableOpacity>
                     </Col>
                   </Grid>
