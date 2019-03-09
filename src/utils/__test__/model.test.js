@@ -35,6 +35,15 @@ describe('upcomingCollectDates', () => {
     }
     const upcomingCollectDatesGenerator = upcomingCollectDates(collectSchedule)
     expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
+    expect(upcomingCollectDatesGenerator.next().value)
   })
 })
 
