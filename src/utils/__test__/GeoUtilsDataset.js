@@ -1297,7 +1297,7 @@ export const FEATURE_OBJECT_3 = {
     "TYPE_COLLECTE_NO" : 20,
     "TYPE_COLLECTE" : "Collecte recyclage porte en porte ",
     "DATE_DEBUT" : "2015-04-13",
-    "DATE_FIN" : null,
+    "DATE_FIN" : "2020-01-02",
     "JOUR_COLLECTE" : "lundi, chaque 2 semaines"
   }
 };

@@ -1,229 +1,48 @@
 // @flow
 import React, {Component} from "react";
 import {ImageBackground, TouchableOpacity, Platform} from "react-native";
+import { connect } from "react-redux";
 
 import {Content, Text, View} from "native-base";
 import {Grid, Col, Row} from "react-native-easy-grid";
 
+import { itemsFetchData } from "../Home/actions";
+
 import styles from "./styles";
 
-class TabTwo extends Component {
+class TabOne extends Component {
+
+  componentDidMount() {
+    this.props.fetchData()
+  }
+
   render() {
     const navigation = this.props.navigation;
+    const items = this.props.items.filter(item => item.category === 'COMPOST')
     return (
       <Content showsVerticalScrollIndicator={false}>
         <View>
           <Grid>
-            <Row>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/10.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      ANIMATION
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/13.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      EDUCATION
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/6.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      FINANCES
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/1.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      ENVIRONMENT
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/8.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      AUTO
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/7.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      TECHNOLOGY
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/11.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      SPORTS
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/12.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      ART
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/9.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      FASHION
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-              <Col>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("Channel")}
-                >
-                  <ImageBackground
-                    source={require("../../../assets/NewsIcons/2.jpg")}
-                    style={styles.channelImg}
-                  >
-                    <Text
-                      style={
-                        Platform.OS === "android"
-                          ? styles.achannelImgText
-                          : styles.ioschannelImgText
-                      }
-                    >
-                      SCIENCE
-                    </Text>
-                  </ImageBackground>
-                </TouchableOpacity>
-              </Col>
-            </Row>
+            {items.map((item, index) => {
+              return (
+                <Row key={index}>
+                  <Col>
+                    <TouchableOpacity onPress={() => navigation.navigate("Story", {id: item.id})}>
+                      <ImageBackground
+                        source={{uri: item.imageUri}}
+                        style={styles.channelImg} >
+                        <Text
+                          style={
+                            Platform.OS === "android"
+                              ? styles.achannelImgText
+                              : styles.ioschannelImgText
+                          } >
+                          {item.headline}
+                        </Text>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  </Col>
+                </Row>)})}
           </Grid>
         </View>
       </Content>
@@ -231,4 +50,14 @@ class TabTwo extends Component {
   }
 }
 
-export default TabTwo;
+function bindAction(dispatch) {
+  return {
+    fetchData: url => dispatch(itemsFetchData(url)),
+  };
+}
+
+const mapStateToProps = state => ({
+  items: state.homeReducer.items,
+  isLoading: state.homeReducer.isLoading
+});
+export default connect(mapStateToProps, bindAction)(TabOne);

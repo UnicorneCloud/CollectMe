@@ -2,7 +2,14 @@ import { WEEK_DAYS_MAP, COLLECT_PERIOD_IN_DATA, WEEK_DAYS_IN_DATA, createFrequen
 
 export const getFrequence = (feature) => {
   const collectDays = feature.properties.JOUR_COLLECTE;
-  return createFrequence(extractWeekDays(collectDays).map(e => getWeekDay(e)), getPeriod(collectDays));
+  const startDate = new Date(feature.properties.DATE_DEBUT);
+  const endDate = feature.properties.DATE_FIN ? new Date(feature.properties.DATE_FIN) : null;
+  return createFrequence(
+    extractWeekDays(collectDays).map(e => getWeekDay(e)),
+    getPeriod(collectDays),
+    startDate,
+    endDate
+  );
 };
 
 export const getWeekDay = (frenchDay) => {

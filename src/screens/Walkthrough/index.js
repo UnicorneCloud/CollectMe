@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from "react";
 import { Platform, Dimensions, StatusBar, View } from "react-native";
 import { Container, Content, Text, Button, Icon } from "native-base";
@@ -6,9 +5,13 @@ import Carousel from "react-native-carousel-view";
 import { connect } from "react-redux";
 
 import { tipsFetch } from "../../actions";
-import datas from "./data.json"
+import { DATA } from "./data"
 
 import styles from "./styles";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+
+
+import { Permissions, Notifications } from 'expo'
 
 const deviceHeight = Dimensions.get("window").height;
 const deviceWidth = Dimensions.get("window").width;
@@ -27,15 +30,68 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// const PUSH_ENDPOINT = 'https://your-server.com/users/push-token';
+
+async function registerForPushNotificationsAsync() {
+  const { status: existingStatus } = await Permissions.getAsync(
+    Permissions.NOTIFICATIONS
+  );
+  let finalStatus = existingStatus;
+
+  console.log('#1')
+
+  // only ask if permissions have not already been determined, because
+  // iOS won't necessarily prompt the user a second time.
+  if (existingStatus !== 'granted') {
+    // Android remote notification permissions are granted during the app
+    // install, so this will only ask on iO
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+    finalStatus = status;
+  }
+  console.log('#2')
+
+  // Stop here if the user did not grant permissions
+  if (finalStatus !== 'granted') {
+    return;
+  }
+  console.log('#3')
+
+  // Get the token that uniquely identifies this device
+  const token = await Notifications.getExpoPushTokenAsync();
+  console.log('TOKEN:', token)
+
+  // POST the token to your backend server from where you can retrieve it to send push notifications.
+  // return fetch(PUSH_ENDPOINT, {
+  //   method: 'POST',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify({
+  //     token: {
+  //       value: token,
+  //     },
+  //     user: {
+  //       username: 'Brent',
+  //     },
+  //   }),
+  // });
+}
 
 class Walkthrough extends Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      tips: DATA,
+    };
+  }
+  
   componentDidMount() {
-    this.props.fetchData(datas)
+    registerForPushNotificationsAsync()
   }
 
   render() {
-    const tipsTemp = this.props.tips
+    const tipsTemp = this.state.tips
     const tips = (tipsTemp.length>0) ? [tipsTemp[getRandomInt(0, tipsTemp.length-1)]] : []
 
     return (
@@ -61,9 +117,10 @@ class Walkthrough extends Component {
                           ? styles.apaginationText
                           : styles.iospaginationText
                       } >
-                    Astuces
+                      <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
+                      <Text style={styles.titleText}> Astuce verte!</Text>
                     </Text>
-                    <Icon name="md-bulb" style={styles.imageIcons} />
+                    {tip.icon}
                     <Text
                       numberOfLines={2}
                       style={

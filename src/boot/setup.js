@@ -27,7 +27,8 @@ export default class Setup extends Component {
       Roboto: require("native-base/Fonts/Roboto.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       Ionicons: require("@expo/vector-icons/fonts/Ionicons.ttf"),
-      MaterialIcons: require('@expo/vector-icons/fonts/MaterialIcons.ttf')
+      MaterialCommunityIcons: require("@expo/vector-icons/fonts/MaterialCommunityIcons.ttf"),
+      MaterialIcons: require("@expo/vector-icons/fonts/MaterialIcons.ttf")
     });
 
     this.setState({ isReady: true });

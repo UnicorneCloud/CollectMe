@@ -67,11 +67,15 @@ export default {
     marginBottom: 20
   },
   imageIcons: {
-    fontSize: 120
+    fontSize: 120,
+    color: "#FFF"
   },
   Button: {
     alignSelf: "center",
     paddingHorizontal: 20,
     backgroundColor: "rgba(0,0,0,0.2)"
+  },
+  titleText: {
+    fontSize: 20
   }
 };
