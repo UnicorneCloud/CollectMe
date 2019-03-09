@@ -54,7 +54,7 @@ class Home extends Component {
     return (
       <TouchableOpacity
         style={{ flexDirection: "row" }}
-        onPress={() => this.props.navigation.navigate("Story")}
+        onPress={() => this.props.navigation.navigate("Story", {id: item.id})}
       >
         <View style={styles.newsContent}>
           <Text numberOfLines={2} style={styles.newsHeader}>
@@ -73,8 +73,7 @@ class Home extends Component {
             <Col>
               <TouchableOpacity
                 style={styles.newsTypeView}
-                onPress={() => this.props.navigation.navigate("Channel")}
-              >
+                onPress={() => this.props.navigation.navigate("Story", {id: item.id})} >
                 <Text style={styles.newsTypeText}>
                   {item.category}
                 </Text>
