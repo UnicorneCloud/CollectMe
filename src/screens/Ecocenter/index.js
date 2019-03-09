@@ -70,6 +70,6 @@ function bindAction(dispatch) {
 }
 
 const mapStateToProps = state => ({
-  location: state.globalReducer.location
+  location: state.locationReducer.location
 });
 export default connect(mapStateToProps, bindAction)(Ecocenter);

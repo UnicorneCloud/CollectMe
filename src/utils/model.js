@@ -25,9 +25,22 @@ export const WEEK_DAYS_IN_DATA = {
   SUNDAY: "dimanche"
 };
 
+export const COLLECT_TYPES = {
+  TRASH: 'Thrash',
+  RECYCLING: 'Recycling'
+}
+
 export const createFrequence = (iterableOfDay, everyXWeek) => {
   return {
     days: new Set(iterableOfDay),
     period: everyXWeek
   };
 };
+
+
+export const createCollectSchedule = (frequency, type) => {
+  return {
+    type,
+    frequency
+  }
+}
