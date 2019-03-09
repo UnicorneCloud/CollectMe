@@ -1,44 +1,27 @@
-[
-  {
+[{
 	"id": 0,
-	"headline": "Flat App is focused on a minimal use of simple elements, typography and flat colors.",
-	"link": "CDC",
+	"headline": "Faire son épicerie zéro déchet, comment ça fonctionne ?",
+	"link": "fraichementpresse.ca",
 	"time": "1h ago",
-	"category": "ENVIRONMENT"
-  },
-  {
+	"category": "ZERO DÉCHET",
+	"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/0.jpg",
+	"content": "Comme le nom l'indique, il s'agit de minimiser le nombre de déchets suite à l'achat de produits. On arrive donc avec ses propres contenants, qui seront d’abord pesés, avant d’y ajouter ce que l’on souhaite acheter. Les produits sont offerts en vrac et on prend ce dont on a besoin. Il ne reste plus qu'à passer à la caisse, et c’est tout!"
+},
+{
 	"id": 1,
-	"headline": "Highly customizable widgets are part of our never ending mission.",
-	"link": "SPACE.com",
+	"headline": "10 changements qui ne coûtent presque rien pour produire moins de déchets dans la cuisine",
+	"link": "fraichementpresse.ca",
 	"time": "5h ago",
-	"category": "SCIENCE"
-  },
-  {
+	"category": "ZÉRO DÉCHET",
+	"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/1.jpg",
+	"content": "Si vous souhaitez faire des efforts constants pour réduire votre volume de déchets à la maison, bravo! La cuisine est un excellent endroit pour commencer. Voici 10 manières de repenser ses habitudes qui donnent un gros coup de pouce à l’environnement, sans pour autant être dispendieuses. Oui, parfois il faut débourser pour se procurer certaines alternatives et en général, celles-ci sont plus chères un peu que les versions jetables, mais il faut penser à la durabilité! À la longue, un produit qu’on peut réutiliser au quotidien pendant des années revient beaucoup moins cher. Tout le monde y gagne! Il n’est pas question de jouer à la police ici; personne n’est parfait! L’idée est plutôt de vous inspirer à appliquer quelques petits changements à la fois."
+},
+{
 	"id": 2,
-	"headline": "Ready to use components built using NativeBase.",
+	"headline": "Des idées pour rendre son lunch plus « zéro déchet »",
 	"link": "SKY.com",
 	"time": "2days ago",
-	"category": "WORLD"
-  },
-  {
-	"id": 3,
-	"headline": "Theme your app with one single file.",
-	"link": "ESPN",
-	"time": "12days ago",
-	"category": "SPORTS"
-  },
-  {
-	"id": 4,
-	"headline": "It is easier with Flat App design to quickly convey information while still looking visually appealing and approachable.",
-	"link": "ART.com",
-	"time": "23days ago",
-	"category": "ART"
-  },
-  {
-	"id": 5,
-	"headline": "NativeBase builds a layer on top of React Native that provides, basic set of components for mobile application development.",
-	"link": "Money.com",
-	"time": "2months ago",
-	"category": "FINANCE"
-  }
-]
+	"category": "ZÉRO DÉCHET",
+	"imageUri": "https://s3.ca-central-1.amazonaws.com/colectme/NewsIcons/header/2.jpg",
+	"content": "C’est bien beau vouloir réduire son volume de déchets, mais disons que c’est plus facile de le faire à la maison qu'ailleurs. Alors comment procède-t-on quand on veut faire son lunch, que ce soit pour l’école ou le travail? Il y a différents moyens, que vous n’avez pas tous besoin d’adopter en même temps non plus! L’idée générale est de devenir plus conscient et d’effectuer de petits pas qui finissent pas avoir un plus gros impact. Vous êtes capables!"
+}]
