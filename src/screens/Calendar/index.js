@@ -13,18 +13,20 @@ import {
   Icon,
   View
 } from "native-base";
+import { connect } from "react-redux";
 import { Grid, Col } from "react-native-easy-grid";
 import { Calendar as MonthCalendar } from "react-native-calendars";
 import dayjs from 'dayjs';
 
 import styles from "./styles";
-import events from "./data.json"
+import { itemsFetchCalendarData } from "./actions"
 
 const headerLogo = require("../../../assets/header-logo.png");
 type Props = {
   navigation: () => void,
   day: string
 };
+
 class Calendar extends Component {
   state: {
     date: Object,
@@ -49,10 +51,14 @@ class Calendar extends Component {
     });
   }
 
+  componentDidMount() {
+    this.props.fetchData()
+  }
+
 
 
   render() {
-    console.log(events)
+    const events = this.props.items
 
     let eventDates = {}
     events.forEach(d => {
@@ -148,4 +154,13 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+function bindAction(dispatch) {
+  return {
+    fetchData: url => dispatch(itemsFetchCalendarData(url)),
+  };
+}
+
+const mapStateToProps = state => ({
+  items: state.calendarReducer.items,
+});
+export default connect(mapStateToProps, bindAction)(Calendar);
