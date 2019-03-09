@@ -29,7 +29,7 @@ import Carousel from "react-native-carousel-view";
 
 import { itemsFetchData, itemsHeaderFetchData } from "./actions";
 
-import datas from "./data.json";
+import datas from "./data.json"
 import dataHeader from './data.header.json'
 
 import styles from "./styles";
