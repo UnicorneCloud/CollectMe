@@ -39,9 +39,9 @@ class Home extends Component {
   async componentDidMount() {
     this.props.fetchData()
     this.props.fetchHeaderData()
-    
+
     const result = await Permissions.askAsync(Permissions.NOTIFICATIONS);
-  
+
     if (Constants.isDevice && result.status === 'granted') {
       console.log("Notification permissions granted.")
     }
@@ -50,20 +50,19 @@ class Home extends Component {
     this.props.setAllCollectSchedules(collectSchedules)
     await this.resetScheduledNotifications(collectSchedules)
   }
-  
-  async resetScheduledNotifications(collectSchedules){
+
+  async resetScheduledNotifications(collectSchedules) {
     await Notifications.cancelAllScheduledNotificationsAsync()
     await Notifications.scheduleLocalNotificationAsync({
       title: 'Déchets',
       body: 'La collecte de déchets est demain matin.'
     },
-    {
-      time: (new Date()).getTime() + 1000,
-    })
+      {
+        time: (new Date()).getTime() + 1000,
+      })
 
     await Promise.all(Object.keys(collectSchedules)
-      .map(collectType => {
-        console.log('sad')
+      .map(collectType => {
         const collectSchedule = collectSchedules[collectType]
         const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.daysInt.length * collectSchedule.period)
         const promises = dates.map(date => {
@@ -73,24 +72,22 @@ class Home extends Component {
               title: name.charAt(0).toUpperCase() + name.slice(1),
               body: 'La collecte de ' + name + ' est demain matin.'
             },
-            {
-              time: date.subtract(1, 'day').set('hour', 18).toDate(),
-              repeat: 'month'
-            }),
+              {
+                time: date.subtract(1, 'day').set('hour', 18).toDate(),
+                repeat: 'month'
+              }),
             Notifications.scheduleLocalNotificationAsync({
               title: name.charAt(0).toUpperCase() + name.slice(1),
               body: 'La collecte de ' + name + ' est ce matin.'
             },
-            {
-              time: date.set('hour', 7).toDate(),
-              repeat: 'month'
-            })
+              {
+                time: date.set('hour', 7).toDate(),
+                repeat: 'month'
+              })
           ]
         }).flat()
-        console.log(promises)
         return promises
       }).flat())
-    console.log('consologdonc2')
 
   }
 

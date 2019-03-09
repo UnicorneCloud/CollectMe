@@ -45,7 +45,6 @@ class Calendar extends Component {
     this.setState({ date });
   }
   onDayPress(day: any) {
-    console.log(day.dateString);
     this.setState({
       selected: day.dateString
     });
