@@ -5,11 +5,26 @@
 },
 {
 	"id": 1,
-	"headline": "Prendre des vienoiseries (ou son pain) dans un sac en tissu",
+	"headline": "Avoir toujours des ustensils dans son sac!",
 	"icon": "md-bulb"
 },
 {
 	"id": 2,
-	"headline": "Prendre des vienoiseries (ou son pain) dans un sac en tissu",
+	"headline": "Pensez à acheter en vrac et local!",
+	"icon": "md-bulb"
+},
+{
+	"id": 3,
+	"headline": "Pensez réutilisable et non jetable!",
+	"icon": "md-bulb"
+},
+{
+	"id": 4,
+	"headline": "Fabriquer son rince-bouche maison!",
+	"icon": "md-bulb"
+},
+{
+	"id": 5,
+	"headline": "Raporter ses contenants non utilisé à son épicerie en vrac!",
 	"icon": "md-bulb"
 }]
