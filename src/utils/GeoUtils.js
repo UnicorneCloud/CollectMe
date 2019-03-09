@@ -1,11 +1,8 @@
-import {WEEK_DAYS_MAP, WEEK_DAYS, COLLECT_PERIOD_IN_DATA, WEEK_DAYS_IN_DATA, createFrequence} from './model';
+import { WEEK_DAYS_MAP, COLLECT_PERIOD_IN_DATA, WEEK_DAYS_IN_DATA, createFrequence } from "./model";
 
 export const getFrequence = (feature) => {
   const collectDays = feature.properties.JOUR_COLLECTE;
-
-
-
-  return {};
+  return createFrequence(extractWeekDays(collectDays).map(e => getWeekDay(e)), getPeriod(collectDays));
 };
 
 export const getWeekDay = (frenchDay) => {
@@ -25,14 +22,18 @@ export const getWeekDay = (frenchDay) => {
     case WEEK_DAYS_IN_DATA.SUNDAY:
       return WEEK_DAYS_MAP.SUNDAY;
     default:
-      return "la semaine des 4 jeudis"
+      return "la semaine des 4 jeudis";
   }
 };
 
+export const extractWeekDays = (aString) => {
+  return aString.split(",").slice(0, -1).map(e => e.trim());
+};
+
 export const getPeriod = (aString) => {
-  if(aString.includes(COLLECT_PERIOD_IN_DATA.SEMAINE)){
+  if (aString.includes(COLLECT_PERIOD_IN_DATA.SEMAINE)) {
     return 1;
-  } else if (aString.includes(COLLECT_PERIOD_IN_DATA.BIMENSUEL)){
+  } else if (aString.includes(COLLECT_PERIOD_IN_DATA.BIMENSUEL)) {
     return 2;
   }
 };
