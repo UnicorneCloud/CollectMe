@@ -3,6 +3,7 @@
   "version": "9.0.0",
   "private": true,
   "devDependencies": {
+    "@types/jest": "23.3.13",
     "babel-eslint": "7.2.3",
     "flow-bin": "0.52.0",
     "flow-typed": "2.1.5",
@@ -19,7 +20,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "test": "jest"
+    "test": "jest",
+    "test:tdd": "jest --watch"
   },
   "jest": {
     "preset": "jest-expo",
