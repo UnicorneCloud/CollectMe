@@ -61,7 +61,7 @@ class Story extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchData(datas)
+    this.props.fetchData()
     const itemId = this.props.navigation.getParam('id', '')
   }
 
