@@ -27,6 +27,4 @@ describe("When creating the frequence", () => {
   it("should return 1 as a period", () => {
     expect(myFrequence.get("period")).toBe(EXPECTED_FREQUENCE.get("period"));
   });
-
-
 });
