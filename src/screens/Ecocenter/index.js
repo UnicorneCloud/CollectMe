@@ -10,7 +10,8 @@ import {
   View as RNView,
   Linking,
   TextInput,
-  WebView
+  WebView,
+  ActivityIndicator
 } from "react-native";
 import { Grid, Col,Row } from "react-native-easy-grid";
 
@@ -142,9 +143,6 @@ class Ecocenter extends React.Component {
   };
    render() {
      const {ecocenters, isLoading} = this.state
-     if (isLoading) {
-      return <Spinner />;
-    }
      return (
       <Container>
       <Header>
@@ -160,21 +158,27 @@ class Ecocenter extends React.Component {
         </Body>
         <Right />
       </Header>
-
-      {isLoading ? <Spinner /> :
       <View style={{    justifyContent: 'center',
       flex: 1,
       backgroundColor:'white'}}>
       <TextInput
-                style={{paddingLeft: 10, paddingRight: 10, height: 40, borderColor: 'gray', borderWidth: 1}}
-                onSubmitEditing={e => this.updateLocationStr(e.nativeEvent.text)}
-                value={this.state.locationStr}/>
-            <FlatList
-              data={ecocenters}
-              renderItem={this._renderItem}
-              keyExtractor={item => item.lat + item.lng}/>
+        style={{paddingLeft: 10, paddingRight: 10, height: 40, borderColor: 'gray', borderWidth: 1}}
+        onSubmitEditing={e => this.updateLocationStr(e.nativeEvent.text)}
+        value={this.state.locationStr}/>
+        {isLoading ? 
+        <View style={{
+          justifyContent: 'center',
+          flex: 1,
+          backgroundColor:'white'
+          }}>
+            <Spinner/>
+        </View> :
+        <FlatList
+          data={ecocenters}
+          renderItem={this._renderItem}
+          keyExtractor={item => item.lat + item.lng}/>
+            }
       </View>
-      }
       </Container>
      )
   }
