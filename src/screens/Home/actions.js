@@ -23,3 +23,15 @@ export function itemsFetchData(url: any) {
     dispatch(itemsIsLoading(false));
   };
 }
+export function itemsHeaderFetchDataSuccess(itemsHeader: Object) {
+  return {
+    type: "ITEMS_HEADER_FETCH_DATA_SUCCESS",
+    itemsHeader
+  };
+}
+export function itemsHeaderFetchData(url: any) {
+  return dispatch => {
+    dispatch(itemsHeaderFetchDataSuccess((url: any)));
+    dispatch(itemsIsLoading(false));
+  };
+}
