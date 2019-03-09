@@ -6,7 +6,8 @@ import {
   Platform,
   Slider,
   Dimensions,
-  Linking
+  Linking,
+  WebView
 } from "react-native";
 import { connect } from "react-redux";
 import {
@@ -20,10 +21,9 @@ import {
   Right,
   Body,
   View,
-  Spinner
+  Spinner,
 } from "native-base";
 import { Grid, Col } from "react-native-easy-grid";
-
 import { itemsFetchData } from "../Home/actions";
 
 import styles from "./styles";
@@ -107,7 +107,7 @@ class Story extends Component {
                 <View style={styles.newsContent}>
                   <Grid style={{ paddingBottom: 20 }}>
                     <Col style={{ flexDirection: "row" }}>
-                      <TouchableOpacity onPress={() => openTheURL(item.link)}>
+                      <TouchableOpacity onPress={() => openTheURL(item.url)}>
                         <Text style={styles.newsLink}>{item.link}</Text>
                       </TouchableOpacity>
                       <Icon name="ios-time-outline" style={styles.timeIcon} />
@@ -120,13 +120,12 @@ class Story extends Component {
                     </Col>
                   </Grid>
                   <Text style={styles.newsHeader}>
-                    {item.headline}
+                    {item.headline}{"\n"}
                   </Text>
-                  <Text style={styles.newsHeader}>
+                  <Text style={styles.realNewsContent}>
                     {item.content}
                   </Text>
                 </View>
-
               </View>
             </View>
           </Content>
@@ -143,13 +142,12 @@ function bindAction(dispatch) {
 }
 
 function openTheURL(url) {
-  const theURL = "http://" + url;
-  Linking.canOpenURL(theURL)
+  Linking.canOpenURL(url)
     .then((supported) => {
       if (!supported) {
-        console.log("Can't handle url: " + theURL);
+        console.log("Can't handle url: " + url);
       } else {
-        return Linking.openURL(theURL);
+        return Linking.openURL(url);
       }
     })
     .catch((err) => console.error('An error occurred', err));

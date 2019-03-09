@@ -6,7 +6,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 export const DATA = [
 	{
 	"id": 0,
-	"headline": "Prendre des vienoiseries (ou son pain) dans un sac en tissu",
+	"headline": "Aller chercher ses vienoiseries (ou son pain) avec un sac en tissu",
 	"icon": <MaterialCommunityIcons name="food-croissant" style={styles.imageIcons} />
 },
 {
