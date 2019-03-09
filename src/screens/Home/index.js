@@ -30,7 +30,8 @@ import Carousel from "react-native-carousel-view";
 import styles from "./styles";
 import { setAllCollectSchedules } from '../../actions'
 import { itemsFetchData, itemsHeaderFetchData } from "./actions"
-import { getCollectScheduleData } from '../../utils/model'
+import { getCollectScheduleData, getUpcomingCollectDates } from '../../utils/model'
+import { askLocationPermission } from '../../actions/location';
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
@@ -43,15 +44,22 @@ class Home extends Component {
   
   async resetScheduledNotifications(collectSchedules){
     await Notifications.cancelAllScheduledNotificationsAsync()
-    await Promise.all(Object.keys(collectSchedules).map(collectType => {
-      return Notifications.scheduleLocalNotificationAsync({
-        title: collectType.toString(),
-        body: collectSchedules[collectType].toString()
-      },
-      {
-        time: (new Date()).getTime() + 1000
-      })
-    }))
+    await Promise.all(Object.keys(collectSchedules)
+      .map(collectType => {
+        const collectSchedule = collectSchedules[collectType]
+        console.log(collectSchedule)
+        const dates = getUpcomingCollectDates(collectSchedule, collectSchedule.days.size)
+        console.log(dates)
+        return dates.map(date => 
+           Notifications.scheduleLocalNotificationAsync({
+            title: collectType.charAt(0).toUpperCase() + collectType.slice(1),
+            body: 'La collecte de ' + collectType + ' est demain matin.'
+          },
+          {
+            time: date.subtract(1, 'day').set('hour', 18).toDate()
+          })
+        )
+      }).flat())
   }
   
   async componentDidUpdate(prevProps, prevState){
