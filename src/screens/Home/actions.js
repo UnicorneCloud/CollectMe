@@ -20,7 +20,7 @@ export function itemsFetchDataSuccess(items: Object) {
 export function itemsFetchData(url: any) {
   return dispatch => {
     console.log('fetch data')
-    fetch('https://s3.ca-central-1.amazonaws.com/colectme/data/data.json').then(res => {
+    fetch('https://s3.ca-central-1.amazonaws.com/colectme/data/data.js').then(res => {
       res.json().then(json => {
         dispatch(itemsFetchDataSuccess(json));
         dispatch(itemsIsLoading(false));

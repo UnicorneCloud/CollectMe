@@ -67,7 +67,8 @@ export default {
     marginBottom: 20
   },
   imageIcons: {
-    fontSize: 120
+    fontSize: 120,
+    color: "#FFF"
   },
   Button: {
     alignSelf: "center",

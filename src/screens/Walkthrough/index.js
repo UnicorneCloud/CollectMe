@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from "react";
 import { Platform, Dimensions, StatusBar, View } from "react-native";
 import { Container, Content, Text, Button, Icon } from "native-base";
@@ -6,7 +5,7 @@ import Carousel from "react-native-carousel-view";
 import { connect } from "react-redux";
 
 import { tipsFetch } from "../../actions";
-import datas from "./data.json"
+import { DATA } from "./data"
 
 import styles from "./styles";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -30,13 +29,15 @@ function getRandomInt(min, max) {
 
 
 class Walkthrough extends Component {
-
-  componentDidMount() {
-    this.props.fetchData(datas)
+  constructor(props) {
+    super(props);
+    this.state = {
+      tips: DATA,
+    };
   }
 
   render() {
-    const tipsTemp = this.props.tips
+    const tipsTemp = this.state.tips
     const tips = (tipsTemp.length>0) ? [tipsTemp[getRandomInt(0, tipsTemp.length-1)]] : []
 
     return (
@@ -65,7 +66,7 @@ class Walkthrough extends Component {
                       <MaterialCommunityIcons name="leaf" size={25} color="#FFF" />
                       <Text style={styles.titleText}> Astuce verte!</Text>
                     </Text>
-                    <Icon name="md-bulb" style={styles.imageIcons} />
+                    {tip.icon}
                     <Text
                       numberOfLines={2}
                       style={
