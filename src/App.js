@@ -19,7 +19,8 @@ import Timeline from "./screens/Timeline";
 import Feedback from "./screens/Feedback/";
 import Profile from "./screens/Profile/";
 import Settings from "./screens/Settings";
-import Ecocentre from './screens/Ecocenter'
+import Ecocentre from './screens/Ecocenter';
+import MapScreen from './screens/Map'
 
 const Drawer = createDrawerNavigator(
   {
@@ -32,7 +33,8 @@ const Drawer = createDrawerNavigator(
     Feedback: { screen: Feedback },
     Profile: { screen: Profile },
     Settings: { screen: Settings },
-    Ecocentre: {screen: Ecocentre}
+    Ecocentre: {screen: Ecocentre},
+    MapScreen: {screen: MapScreen}
   },
   {
     initialRouteName: "Home",

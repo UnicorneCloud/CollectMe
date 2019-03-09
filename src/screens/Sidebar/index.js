@@ -95,6 +95,17 @@ class SideBar extends Component {
               <Icon name="ios-timer-outline" />
               <Text style={styles.linkText}>COLLECTES</Text>
             </ListItem>
+            <ListItem
+              button
+              onPress={() => {
+                navigation.navigate("MapScreen");
+              }}
+              iconLeft
+              style={styles.links}
+            >
+              <Icon name="ios-timer-outline" />
+              <Text style={styles.linkText}>MAP</Text>
+            </ListItem>
             {/*<ListItem*/}
               {/*button*/}
               {/*onPress={() => {*/}
