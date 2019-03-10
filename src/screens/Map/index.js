@@ -57,39 +57,17 @@ class MapScreen extends React.Component {
   };
 
   makeIconComposte = (filters) => {
-    const marker = filters.composte ?
+    return filters.composte ?
       <MaterialCommunityIcons name="map-marker" style={styles.toggleMarker} size={20} color="#8B4513"/>
       :
       <MaterialCommunityIcons name="map-marker-off" style={styles.toggleMarker} size={20} color="grey"/>
-    return(
-      <View>
-        {marker}
-        <Switch
-          value={filters.composte}
-          style={styles.toggleThingy}
-          onValueChange={e =>
-            this.setState({ filters: { ...filters, composte: e } })
-          }/>
-      </View>
-    )
   };
 
   makeIconEcocentre = (filters) => {
-    const marker = filters.ecocenters ?
+    return filters.ecocenters ?
       <MaterialCommunityIcons name="map-marker" style={styles.toggleMarker} size={20} color="#28840F"/>
       :
       <MaterialCommunityIcons name="map-marker-off" style={styles.toggleMarker} size={20} color="grey"/>
-    return(
-      <View>
-        {marker}
-        <Switch
-          value={filters.ecocenters}
-          style={styles.toggleThingy}
-          onValueChange={e =>
-            this.setState({ filters: { ...filters, ecocenters: e } })
-          }/>
-      </View>
-    )
   };
 
   openStore = (lng, lat, label) => {
@@ -153,15 +131,29 @@ class MapScreen extends React.Component {
             content={
               <View style={{ flex: 1, backgroundColor: "white" }}>
                 <ListItem
-                  title="Écocentres"
-                  rightIcon={this.makeIconEcocentre(filters)}
+                  title="Compostes communautaires"
+                  leftAvatar={this.makeIconEcocentre(filters)}
+                  rightIcon={
+                    <Switch
+                      value={filters.ecocenters}
+                      onValueChange={e =>
+                        this.setState({ filters: { ...filters, ecocenters: e } })
+                      }/>
+                  }
                   containerStyle={{
                     borderBottomWidth: 1
                   }}
                 />
                 <ListItem
-                  title="Compostes communautaires"
-                  rightIcon={this.makeIconComposte(filters)}
+                  title="Écocentres"
+                  leftAvatar={this.makeIconComposte(filters)}
+                  rightIcon={
+                    <Switch
+                      value={filters.composte}
+                      onValueChange={e =>
+                        this.setState({ filters: { ...filters, composte: e } })
+                      }/>
+                  }
                   containerStyle={{
                     borderBottomWidth: 1
                   }}
