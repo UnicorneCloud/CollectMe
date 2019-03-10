@@ -153,5 +153,10 @@ export default {
     bottom: 0,
     left: 0,
     right: 0
+  },
+  toggleMarker: {
+    position: "absolute",
+    marginLeft: -15,
+    marginTop: 3
   }
 };

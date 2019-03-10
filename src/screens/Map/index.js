@@ -35,11 +35,11 @@ import {
   updateLocation
 } from "../../actions/location";
 import styles from "./styles";
-const deviceWidth = Dimensions.get("window").width;
-const headerLogo = require("../../../assets/header-logo.png");
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { ecocenterMarkers, geoJsonToCoord } from "../../utils/GeoUtils";
 import composteData from "../../../data/composte.json";
 import { ListItem, SearchBar } from 'react-native-elements'
+const headerLogo = require("../../../assets/header-logo.png");
 
 class MapScreen extends React.Component {
   constructor(props) {
@@ -51,9 +51,45 @@ class MapScreen extends React.Component {
       }
     };
   }
+
   componentDidMount = () => {
     this.props.updateLocation();
   };
+
+  makeIconComposte = (filters) => {
+    const marker = filters.composte ?
+      <MaterialCommunityIcons name="map-marker" style={styles.toggleMarker} size={20} color="#8B4513"/>
+      :
+      <MaterialCommunityIcons name="map-marker-off" style={styles.toggleMarker} size={20} color="grey"/>
+    return(
+      <View>
+        {marker}
+        <Switch
+          value={filters.composte}
+          onValueChange={e =>
+            this.setState({ filters: { ...filters, composte: e } })
+          }/>
+      </View>
+    )
+  };
+
+  makeIconEcocentre = (filters) => {
+    const marker = filters.ecocenters ?
+      <MaterialCommunityIcons name="map-marker" style={styles.toggleMarker} size={20} color="#28840F"/>
+      :
+      <MaterialCommunityIcons name="map-marker-off" style={styles.toggleMarker} size={20} color="grey"/>
+    return(
+      <View>
+        {marker}
+        <Switch
+          value={filters.ecocenters}
+          onValueChange={e =>
+            this.setState({ filters: { ...filters, ecocenters: e } })
+          }/>
+      </View>
+    )
+  };
+
   openStore = (lng, lat, label) => {
     const scheme = Platform.select({
       ios: "maps:0,0?q=",
@@ -66,12 +102,15 @@ class MapScreen extends React.Component {
     });
     Linking.openURL(url);
   };
+
   openFilter = () => {
     this._drawer.open();
   };
+
   closeFilter = () => {
     this._drawer.close();
   };
+
   render() {
     const {
       location: { coords },
@@ -113,30 +152,14 @@ class MapScreen extends React.Component {
               <View style={{ flex: 1, backgroundColor: "white" }}>
                 <ListItem
                   title="Écocentres"
-                  rightIcon={
-                    <Switch
-                      value={filters.ecocenters}
-                      onValueChange={e =>
-                        this.setState({
-                          filters: { ...filters, ecocenters: e }
-                        })
-                      }
-                    />
-                  }
+                  rightIcon={this.makeIconEcocentre(filters)}
                   containerStyle={{
                     borderBottomWidth: 1
                   }}
                 />
                 <ListItem
                   title="Compostes communautaires"
-                  rightIcon={
-                    <Switch
-                      value={filters.composte}
-                      onValueChange={e =>
-                        this.setState({ filters: { ...filters, composte: e } })
-                      }
-                    />
-                  }
+                  rightIcon={this.makeIconComposte(filters)}
                   containerStyle={{
                     borderBottomWidth: 1
                   }}
@@ -157,7 +180,7 @@ class MapScreen extends React.Component {
               {filters.ecocenters &&
                 ecocenterMarkers(ecocenters).map(marker => (
                   <Marker
-                    pinColor="green"
+                    pinColor="#28840F"
                     coordinate={marker.coord}
                     title={marker.title}
                     description={marker.description}
