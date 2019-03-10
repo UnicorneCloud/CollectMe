@@ -35,7 +35,7 @@ class SideBar extends Component {
             <ListItem
               button
               onPress={() => {
-                navigation.navigate("Channels");
+                navigation.navigate("Subjects");
               }}
               iconLeft
               style={styles.links}

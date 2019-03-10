@@ -6,7 +6,7 @@ import Tips from "./screens/Tips/";
 import Channel from "./screens/Channel";
 import Story from "./screens/Story";
 import Home from "./screens/Home/";
-import Channels from "./screens/Channels";
+import Subjects from "./screens/Subjects";
 import Sidebar from "./screens/Sidebar";
 import Calendar from "./screens/Calendar/";
 import Collectes from "./screens/Collectes";
@@ -17,7 +17,7 @@ import MapScreen from './screens/Map'
 const Drawer = createDrawerNavigator(
   {
     Home: { screen: Home },
-    Channels: { screen: Channels },
+    Subjects: { screen: Subjects },
     Calendar: { screen: Calendar },
     Collectes: { screen: Collectes },
     Settings: { screen: Settings },
