@@ -41,7 +41,8 @@ export const WEEK_DAYS_IN_DATA = {
 
 export const COLLECT_TYPES = {
   GARBAGE: 'garbage',
-  RECYCLING: 'recyclage'
+  RECYCLING: 'recyclage',
+  GREEN_RESIDUES: 'green residues'
 }
 
 export const createFrequence = (iterableOfDay, everyXWeek, startDate, endDate) => {
@@ -56,17 +57,29 @@ export const createFrequence = (iterableOfDay, everyXWeek, startDate, endDate) =
   };
 };
 
-export const getCollectScheduleData = (location) => {
-  location.latitude = 46.8784799
-  location.longitude = -71.348191
+makeContainers = (data, location) => {
+  const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
+  (new GeoJsonGeometriesLookup(data)).getContainers(locationPoint)
+}
+
+export const getAllGeometriesMock = (location) => {
+  const geometries = {}
+  geometries[COLLECT_TYPES.GARBAGE] = makeContainers(require('../../data/dechets.json'), location)
+  geometries[COLLECT_TYPES.RECYCLING] = makeContainers(require('../../data/recyclable.json'), location)
+  return geometries
+}
+
+export const getCollectScheduleData = (location = { latitude: 46.8784799, longitude: -71.348191 }) => {
   const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
   const collectScheduleDataByType = [
     [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')],
-    [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')]
+    [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')],
+    [COLLECT_TYPES.GREEN_RESIDUES, require('../../data/residusverts.json')]
   ]
   return collectScheduleDataByType.reduce((result, [key, data]) => {
     const glookup = new GeoJsonGeometriesLookup(data);
     const container = glookup.getContainers(locationPoint);
+
     if (container.features.length > 0) {
       const frequency = getFrequence(container.features[0])
       result[key] = frequency

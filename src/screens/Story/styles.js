@@ -23,7 +23,12 @@ export default {
   },
   newsHeader: {
     color: "#222",
-    fontWeight: "500",
+    fontWeight: "800",
+    fontSize: 18
+  },
+  realNewsContent: {
+    color: "#222",
+    fontWeight: "400",
     fontSize: 14
   },
   newsCommentContainer: {

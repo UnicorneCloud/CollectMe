@@ -28,9 +28,9 @@ import { Grid, Col } from "react-native-easy-grid";
 import Carousel from "react-native-carousel-view";
 
 import styles from "./styles";
-import { setAllCollectSchedules } from '../../actions'
+import { setAllCollectSchedules, setAllGeometries } from '../../actions'
 import { itemsFetchData, itemsHeaderFetchData } from "./actions"
-import { getCollectScheduleData, getUpcomingCollectDates } from '../../utils/model'
+import { getCollectScheduleData, getUpcomingCollectDates, getAllGeometriesMock } from '../../utils/model'
 
 const deviceWidth = Dimensions.get("window").width;
 const headerLogo = require("../../../assets/header-logo.png");
@@ -45,6 +45,10 @@ class Home extends Component {
     if (Constants.isDevice && result.status === 'granted') {
       console.log("Notification permissions granted.")
     }
+
+    const collectSchedules = getCollectScheduleData()
+    this.props.setAllCollectSchedules(collectSchedules)
+    await this.resetScheduledNotifications(collectSchedules)
   }
 
   async resetScheduledNotifications(collectSchedules) {
@@ -87,13 +91,9 @@ class Home extends Component {
 
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { location } = this.props
-    if (true) {
-      const collectSchedules = getCollectScheduleData(location)
-      this.props.setAllCollectSchedules(collectSchedules)
-      await this.resetScheduledNotifications(collectSchedules)
-    }
+    this.props.setAllGeometries(getAllGeometriesMock(location))
   }
 
   _renderItem = ({ item }) => {
@@ -219,7 +219,8 @@ function bindAction(dispatch) {
   return {
     fetchData: url => dispatch(itemsFetchData(url)),
     fetchHeaderData: url => dispatch(itemsHeaderFetchData(url)),
-    setAllCollectSchedules: (collectSchedules) => dispatch(setAllCollectSchedules(collectSchedules))
+    setAllCollectSchedules: (collectSchedules) => dispatch(setAllCollectSchedules(collectSchedules)),
+    setAllGeometries: (geometries) => dispatch(setAllGeometries(geometries))
   };
 }
 

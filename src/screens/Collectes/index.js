@@ -27,7 +27,7 @@ class Collectes extends Component {
     for (var scheduleType in collectSchedules) {
       const schedule = collectSchedules[scheduleType]
 
-      const test = getUpcomingCollectDates(schedule, 14 / schedule.period).map(upcomingDate => {
+      const test = getUpcomingCollectDates(schedule, 2 / schedule.period).map(upcomingDate => {
         return {
           "collectType": scheduleType,
           "collectPeriod": schedule.period,
@@ -39,6 +39,27 @@ class Collectes extends Component {
     }
 
     nextCollects.sort((a, b) => a.collectDate - b.collectDate)
+    console.log("Next Collects", nextCollects);
+
+    collectIcons = {
+      "garbage":
+        <Icon
+          name="ios-trash"
+          style={{ color: "#999", marginLeft: 2 }} />,
+      "recyclage":
+        <FontAwesome
+          name="recycle"
+          style={styles.timelineIcon} />,
+      "green residues":
+        <Icon
+          name="ios-leaf"
+          style={{ color: "#999", marginLeft: 2 }} />,
+    }
+    collectTitles = {
+      "garbage": "Collectes des déchets",
+      "recyclage": "Collectes du recyclage",
+      "green residues": "Collectes de résidus verts"
+    }
 
     return (
       <Container style={styles.bg}>
@@ -61,19 +82,11 @@ class Collectes extends Component {
                 <Grid>
                   <Col style={{ flexDirection: "row" }}>
                     {
-                      collect.collectType == "garbage" ?
-                        <Icon
-                          name="ios-trash"
-                          style={{ color: "#999", marginLeft: 2 }}
-                        /> :
-                        <FontAwesome
-                          name="recycle"
-                          style={styles.timelineIcon}
-                        />
+                      collectIcons[collect.collectType]
                     }
                     <View style={{ paddingLeft: 15 }}>
                       <Text style={styles.timelineContentHeading}>
-                        {`Collectes ${collect.collectType == "garbage" ? "des déchets" : " du recyclage"}`}
+                        {collectTitles[collect.collectType]}
                       </Text>
                     </View>
                   </Col>
