@@ -167,8 +167,8 @@ class MapScreen extends React.Component {
             }
           >
             <MapView
-            followsUserLocatio
-            showsMyLocationButton
+              followsUserLocation
+              showsMyLocationButton
               showsUserLocation
               style={styles.map}
               initialRegion={{
@@ -196,12 +196,12 @@ class MapScreen extends React.Component {
                         )
                       }
                     >
-                    <RNView style={{maxWidth: deviceWidth - 30, paddingTop: 5, paddingLeft: 5, paddingRight: 5, paddingBottom:5,borderRadius: 4}}>
-                      <Text style={{color: 'black'}}>{marker.title}</Text>
-                      <Text style={{color: 'gray', fontSize: 13}}>{marker.description}</Text>
-                      <Text style={{color: 'blue', fontSize: 13, paddingTop: 5}}>Itinéraire</Text>
+                      <RNView style={{maxWidth: deviceWidth - 30, paddingTop: 5, paddingLeft: 5, paddingRight: 5, paddingBottom:5,borderRadius: 4}}>
+                        <Text style={{color: 'black'}}>{marker.title}</Text>
+                        <Text style={{color: 'gray', fontSize: 13}}>{marker.description}</Text>
+                        <Text style={{color: 'blue', fontSize: 13, paddingTop: 5}}>Itinéraire</Text>
                       </RNView>
-                      </Callout>
+                    </Callout>
                   </Marker>
                 ))}
               {filters.composte &&
@@ -222,10 +222,10 @@ class MapScreen extends React.Component {
                           )
                         }
                       >
-                      <RNView style={{maxWidth: deviceWidth - 30, paddingTop: 5, paddingLeft: 5, paddingRight: 5, paddingBottom:5}}>
-                      <Text style={{color: 'black', maxWidth: deviceWidth - 30}}>{composte.nom + " - Composte communautaire"}</Text>
-                      <Text style={{color: 'blue', fontSize: 13, paddingTop: 5}}>Itinéraire</Text>
-                      </RNView>
+                        <RNView style={{maxWidth: deviceWidth - 30, paddingTop: 5, paddingLeft: 5, paddingRight: 5, paddingBottom:5}}>
+                          <Text style={{color: 'black', maxWidth: deviceWidth - 30}}>{composte.nom + " - Composte communautaire"}</Text>
+                          <Text style={{color: 'blue', fontSize: 13, paddingTop: 5}}>Itinéraire</Text>
+                        </RNView>
                       </Callout>
                     </Marker>
                   );
