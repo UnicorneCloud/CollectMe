@@ -3,7 +3,7 @@ import React, {Component} from "react";
 import {ImageBackground, TouchableOpacity, Platform} from "react-native";
 import { connect } from "react-redux";
 
-import {Content, Text, View} from "native-base";
+import {Content, Text, View, Icon} from "native-base";
 import {Grid, Col, Row} from "react-native-easy-grid";
 
 import { itemsFetchData } from "../Home/actions";
@@ -31,14 +31,20 @@ class TabOne extends Component {
                       <ImageBackground
                         source={{uri: item.imageUri}}
                         style={styles.channelImg} >
-                        <Text
-                          style={
-                            Platform.OS === "android"
-                              ? styles.achannelImgText
-                              : styles.ioschannelImgText
-                          } >
-                          {item.headline}
-                        </Text>
+                        <View style={styles.swiperTextContent}>
+                              <Text numberOfLines={2} style={styles.newsPosterHeader} >
+                                {item.headline}
+                              </Text>
+                              <Grid style={styles.swiperContentBox}>
+                                <Col style={{ flexDirection: "row" }}>
+                                  <Text style={styles.newsPosterLink}>
+                                    {item.link}
+                                  </Text>
+                                  <Icon name="ios-time-outline" style={styles.timePosterIcon} />
+                                  <Text style={styles.newsPosterLink}>{item.time}</Text>
+                                </Col>
+                              </Grid>
+                            </View>
                       </ImageBackground>
                     </TouchableOpacity>
                   </Col>

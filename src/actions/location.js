@@ -28,7 +28,7 @@ export const fetchLocation = (search) => {
     fetch(`https://api.opencagedata.com/geocode/v1/json?q=${query}&key=1c886d010a164f299c4101c98f151cd9`).then(res => {
       res.json().then(json => {
           dispatch(fetchLocationSuccess(json.results[0]))
-          if(getState().locationReducer.ecocenter.length === 0 ){
+          if(getState().locationReducer.ecocenters.length === 0 ){
             dispatch(fetchEcocenters(json.results[0].geometry.lat, json.results[0].geometry.lng))
           }
         })
