@@ -40,6 +40,7 @@ import { ecocenterMarkers, geoJsonToCoord } from "../../utils/GeoUtils";
 import composteData from "../../../data/composte.json";
 import { ListItem, SearchBar } from 'react-native-elements'
 const headerLogo = require("../../../assets/header-logo.png");
+const deviceWidth = Dimensions.get("window").width;
 
 class MapScreen extends React.Component {
   constructor(props) {
