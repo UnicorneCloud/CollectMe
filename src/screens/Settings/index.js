@@ -11,8 +11,6 @@ import {
   Button,
   Icon,
   Thumbnail,
-  Item,
-  Input,
   View,
   Left,
   Right,
@@ -31,16 +29,9 @@ type Props = {
 };
 class Settings extends Component {
   state: {
-    monSwitch: true,
-    tueSwitch: false,
-    wedSwitch: false,
-    thuSwitch: false,
-    friSwitch: false,
-    satSwitch: false,
-    sunSwitch: false,
-    Username: "",
-    email: "",
-    password: "",
+    dechetSwitch: true,
+    recyclageSwitch: false,
+    residusVertSwitch: false,
     offset: {
       x: 0,
       y: 0
@@ -50,16 +41,9 @@ class Settings extends Component {
   constructor(props: Props) {
     super(props);
     this.state = {
-      monSwitch: true,
-      tueSwitch: false,
-      wedSwitch: false,
-      thuSwitch: false,
-      friSwitch: false,
-      satSwitch: false,
-      sunSwitch: false,
-      Username: "",
-      email: "",
-      password: "",
+      dechetSwitch: true,
+      recyclageSwitch: false,
+      residusVertSwitch: false,
       offset: {
         x: 0,
         y: 0
@@ -124,7 +108,7 @@ class Settings extends Component {
                     style={styles.switch}
                     thumbTintColor={primary}
                     tintColor={primary}
-                    value={this.state.monSwitch}
+                    value={this.state.dechetSwitch}
                   />
                 </Col>
               </Grid>
@@ -153,7 +137,7 @@ class Settings extends Component {
                     style={styles.switch}
                     thumbTintColor={primary}
                     tintColor={primary}
-                    value={this.state.tueSwitch}
+                    value={this.state.recyclageSwitch}
                   />
                 </Col>
               </Grid>
@@ -182,7 +166,7 @@ class Settings extends Component {
                     style={styles.switch}
                     thumbTintColor={primary}
                     tintColor={primary}
-                    value={this.state.wedSwitch}
+                    value={this.state.residusVertSwitch}
                   />
                 </Col>
               </Grid>
