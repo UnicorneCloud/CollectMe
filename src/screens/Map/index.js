@@ -112,7 +112,7 @@ class MapScreen extends React.Component {
             content={
               <View style={{ flex: 1, backgroundColor: "white" }}>
                 <ListItem
-                  title="Montrer les écocentres"
+                  title="Écocentres"
                   rightIcon={
                     <Switch
                       value={filters.ecocenters}
@@ -128,7 +128,7 @@ class MapScreen extends React.Component {
                   }}
                 />
                 <ListItem
-                  title="Montrer les compostes communautaires"
+                  title="Compostes communautaires"
                   rightIcon={
                     <Switch
                       value={filters.composte}

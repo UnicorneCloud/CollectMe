@@ -27,7 +27,7 @@ class Collectes extends Component {
     for (var scheduleType in collectSchedules) {
       const schedule = collectSchedules[scheduleType]
 
-      const test = getUpcomingCollectDates(schedule, 14 / schedule.period).map(upcomingDate => {
+      const test = getUpcomingCollectDates(schedule, 2 / schedule.period).map(upcomingDate => {
         return {
           "collectType": scheduleType,
           "collectPeriod": schedule.period,
