@@ -52,7 +52,7 @@ export default {
   profilePic: {
     width: 60,
     height: 60,
-    borderRadius: Platform.OS === "android" ? 60 : 30
+    borderRadius: 0
   },
   signupContainer: {
     marginTop: 30,

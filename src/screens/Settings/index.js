@@ -1,7 +1,7 @@
 // @flow
 var Color = require("color");
 import React, { Component } from "react";
-import { Image, Switch, TouchableOpacity, Platform } from "react-native";
+import { Image, Switch, TouchableOpacity, Platform, Linking } from "react-native";
 
 import {
   Container,
@@ -86,9 +86,9 @@ class Settings extends Component {
           <View>
             <Text style={styles.signupHeader}>SETTINGS</Text>
             <View style={styles.profileButtons}>
-              <TouchableOpacity style={{ alignSelf: "center" }}>
+              <TouchableOpacity style={{ alignSelf: "center" }} onPress={() => Linking.openURL("https://unicornpowered.com/")}>
                 <Thumbnail
-                  source={require("../../../assets/DefaultIcon.png")}
+                  source={require("../../../assets/logo-without-title-white-high-res.png")}
                   style={styles.profilePic}
                 />
               </TouchableOpacity>
