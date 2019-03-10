@@ -2,6 +2,14 @@
 
 ## Inspiration
 
+>Québec, le 17 février 2016 – La proportion de ménages québécois qui déclarent pratiquer le compostage résidentiel a fortement augmenté entre 2006 et 2013, passant de 13 % à 45 %.
+
+
+>En 2013, 27 % des ménages québécois déclarent composter leurs résidus de cuisine. Plus de la moitié (56 %) des ménages qui disposent d’une cour susceptible de générer des résidus verts déclarent composter. Ces proportions sont en augmentation depuis 2006.
+
+
+>Actuellement, au Québec, seulement 30 % des municipalités offrent la collecte des matières organiques.
+
 Une seule application pour rassembler toutes l'information pertiennente sur les services à proximités pour réduire son impact écologique. L'application permet d'améliorer la relation avec le citoyen et la connaissance du territoire
 
 ## Ce que l'application fait
