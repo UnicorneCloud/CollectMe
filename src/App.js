@@ -4,7 +4,6 @@ import { createDrawerNavigator, createStackNavigator } from "react-navigation";
 import { Root } from "native-base";
 import Login from "./screens/Login/";
 import ForgotPassword from "./screens/ForgotPassword";
-import SignUp from "./screens/SignUp/";
 import Tips from "./screens/Tips/";
 import Comments from "./screens/Comments/";
 import Channel from "./screens/Channel";
@@ -43,7 +42,6 @@ const Drawer = createDrawerNavigator(
 const App = createStackNavigator(
   {
     Login: { screen: Login },
-    SignUp: { screen: SignUp },
     ForgotPassword: { screen: ForgotPassword },
     Tips: { screen: Tips },
     Story: { screen: Story },
