@@ -88,7 +88,7 @@ class Settings extends Component {
             <View style={styles.profileButtons}>
               <TouchableOpacity style={{ alignSelf: "center" }} onPress={() => Linking.openURL("https://unicornpowered.com/")}>
                 <Thumbnail
-                  source={require("../../../assets/logo-without-title-white-high-res.png")}
+                  source={require("../../../assets/DefaultIcon.png")}
                   style={styles.profilePic}
                 />
               </TouchableOpacity>
