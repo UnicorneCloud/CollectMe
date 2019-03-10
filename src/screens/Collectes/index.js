@@ -41,7 +41,7 @@ class Collectes extends Component {
     nextCollects.sort((a, b) => a.collectDate - b.collectDate)
     console.log("Next Collects", nextCollects);
 
-    collectIcons = {
+    const collectIcons = {
       "garbage":
         <Icon
           name="ios-trash"
@@ -55,7 +55,7 @@ class Collectes extends Component {
           name="ios-leaf"
           style={{ color: "#999", marginLeft: 2 }} />,
     }
-    collectTitles = {
+    const collectTitles = {
       "garbage": "Collectes des déchets",
       "recyclage": "Collectes du recyclage",
       "green residues": "Collectes de résidus verts"
