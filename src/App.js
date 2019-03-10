@@ -3,7 +3,6 @@ import React from "react";
 import { createDrawerNavigator, createStackNavigator } from "react-navigation";
 import { Root } from "native-base";
 import Tips from "./screens/Tips/";
-import Comments from "./screens/Comments/";
 import Channel from "./screens/Channel";
 import Story from "./screens/Story";
 import Home from "./screens/Home/";
@@ -35,7 +34,6 @@ const App = createStackNavigator(
   {
     Tips: { screen: Tips },
     Story: { screen: Story },
-    Comments: { screen: Comments },
     Channel: { screen: Channel },
     Drawer: { screen: Drawer }
   },
