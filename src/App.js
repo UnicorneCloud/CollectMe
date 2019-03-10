@@ -2,7 +2,6 @@
 import React from "react";
 import { createDrawerNavigator, createStackNavigator } from "react-navigation";
 import { Root } from "native-base";
-import ForgotPassword from "./screens/ForgotPassword";
 import Tips from "./screens/Tips/";
 import Comments from "./screens/Comments/";
 import Channel from "./screens/Channel";
@@ -13,7 +12,6 @@ import Sidebar from "./screens/Sidebar";
 import Overview from "./screens/Overview";
 import Calendar from "./screens/Calendar/";
 import Collectes from "./screens/Collectes";
-import Feedback from "./screens/Feedback/";
 import Profile from "./screens/Profile/";
 import Settings from "./screens/Settings";
 import Ecocentre from './screens/Ecocenter';
@@ -26,7 +24,6 @@ const Drawer = createDrawerNavigator(
     Overview: { screen: Overview },
     Calendar: { screen: Calendar },
     Collectes: { screen: Collectes },
-    Feedback: { screen: Feedback },
     Profile: { screen: Profile },
     Settings: { screen: Settings },
     Ecocentre: {screen: Ecocentre},
@@ -40,7 +37,6 @@ const Drawer = createDrawerNavigator(
 
 const App = createStackNavigator(
   {
-    ForgotPassword: { screen: ForgotPassword },
     Tips: { screen: Tips },
     Story: { screen: Story },
     Comments: { screen: Comments },
