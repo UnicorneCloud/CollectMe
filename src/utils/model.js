@@ -41,7 +41,8 @@ export const WEEK_DAYS_IN_DATA = {
 
 export const COLLECT_TYPES = {
   GARBAGE: 'garbage',
-  RECYCLING: 'recyclage'
+  RECYCLING: 'recyclage',
+  GREEN_RESIDUES: 'green residues'
 }
 
 export const createFrequence = (iterableOfDay, everyXWeek, startDate, endDate) => {
@@ -72,7 +73,8 @@ export const getCollectScheduleData = (location = {latitude: 46.8784799, longitu
   const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
   const collectScheduleDataByType = [
     [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')],
-    [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')]
+    [COLLECT_TYPES.RECYCLING, require('../../data/recyclable.json')],
+    [COLLECT_TYPES.GREEN_RESIDUES, require('../../data/residusverts.json')]
   ]
   return collectScheduleDataByType.reduce((result, [key, data]) => {
     const glookup = new GeoJsonGeometriesLookup(data);
