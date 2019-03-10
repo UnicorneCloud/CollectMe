@@ -80,11 +80,11 @@ class LoginForm extends Component {
     );
   }
   skip() {
-    this.props.navigation.navigate("Walkthrough");
+    this.props.navigation.navigate("Tips");
     return this.props.navigation.dispatch(
       StackActions.reset({
         index: 0,
-        actions: [NavigationActions.navigate({ routeName: "Walkthrough" })]
+        actions: [NavigationActions.navigate({ routeName: "Tips" })]
       })
     );
   }
@@ -93,11 +93,11 @@ class LoginForm extends Component {
     if (this.props.valid) {
       
 
-      this.props.navigation.navigate("Walkthrough");
+      this.props.navigation.navigate("Tips");
       return this.props.navigation.dispatch(
         StackActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({ routeName: "Walkthrough" })]
+          actions: [NavigationActions.navigate({ routeName: "Tips" })]
         })
       );
     } else {

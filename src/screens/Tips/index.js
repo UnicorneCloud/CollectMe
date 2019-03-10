@@ -83,7 +83,7 @@ async function registerForPushNotificationsAsync() {
   // });
 }
 
-class Walkthrough extends Component {
+class Tips extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -170,4 +170,4 @@ function bindAction(dispatch) {
 const mapStateToProps = state => ({
   tips: state.tipsReducer.tips
 });
-export default connect(mapStateToProps, bindAction)(Walkthrough)
+export default connect(mapStateToProps, bindAction)(Tips)

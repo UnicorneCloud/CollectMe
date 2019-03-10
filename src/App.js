@@ -5,7 +5,7 @@ import { Root } from "native-base";
 import Login from "./screens/Login/";
 import ForgotPassword from "./screens/ForgotPassword";
 import SignUp from "./screens/SignUp/";
-import Walkthrough from "./screens/Walkthrough/";
+import Tips from "./screens/Tips/";
 import Comments from "./screens/Comments/";
 import Channel from "./screens/Channel";
 import Story from "./screens/Story";
@@ -47,7 +47,7 @@ const App = createStackNavigator(
     Login: { screen: Login },
     SignUp: { screen: SignUp },
     ForgotPassword: { screen: ForgotPassword },
-    Walkthrough: { screen: Walkthrough },
+    Tips: { screen: Tips },
     Story: { screen: Story },
     Comments: { screen: Comments },
     Channel: { screen: Channel },
@@ -55,8 +55,7 @@ const App = createStackNavigator(
   },
   {
     index: 0,
-    // initialRouteName: "Login",
-    initialRouteName: "Walkthrough",
+    initialRouteName: "Tips",
     headerMode: "none"
   }
 );
