@@ -66,6 +66,7 @@ class MapScreen extends React.Component {
         {marker}
         <Switch
           value={filters.composte}
+          style={styles.toggleThingy}
           onValueChange={e =>
             this.setState({ filters: { ...filters, composte: e } })
           }/>
@@ -83,6 +84,7 @@ class MapScreen extends React.Component {
         {marker}
         <Switch
           value={filters.ecocenters}
+          style={styles.toggleThingy}
           onValueChange={e =>
             this.setState({ filters: { ...filters, ecocenters: e } })
           }/>

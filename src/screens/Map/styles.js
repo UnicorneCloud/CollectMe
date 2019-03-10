@@ -156,7 +156,9 @@ export default {
   },
   toggleMarker: {
     position: "absolute",
-    marginLeft: -15,
     marginTop: 3
+  },
+  toggleThingy: {
+    marginLeft: 15
   }
 };
