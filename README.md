@@ -18,7 +18,13 @@ Rassemble toutes les informations nécessaires aux citoyens pour diminuer son em
 
 En combinant les données de collectes de déchets et recyclage, zone de ramassage des rebuts tels les écocentres et des emplacements des compostages communautaires.
 
-L’application génère des rappels aux citoyens pour l’avertir de la journée de la collecte pour sa résidence.
+L'application permet notamment de : 
+* Sensibiliser les citoyens avec des articles environnementaux
+* Afficher des astuces environnementales aléatoires à chaque ouverture de l'application
+* Afficher un calendrier d'évènement ayant une conscience environnementale
+* Afficher une prévision 14 jours pour les différentes collectes disponibles dans son quartier
+* Trouver les écocentres ainsi que les centres de compost communautaire les plus près de soi sur une carte
+* Générer des rappels aux citoyens pour l’avertir de la journée de la collecte pour son quartier
 
 ## Les données
 
