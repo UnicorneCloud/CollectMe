@@ -9,10 +9,8 @@ import Story from "./screens/Story";
 import Home from "./screens/Home/";
 import Channels from "./screens/Channels";
 import Sidebar from "./screens/Sidebar";
-import Overview from "./screens/Overview";
 import Calendar from "./screens/Calendar/";
 import Collectes from "./screens/Collectes";
-import Profile from "./screens/Profile/";
 import Settings from "./screens/Settings";
 import Ecocentre from './screens/Ecocenter';
 import MapScreen from './screens/Map'
@@ -21,10 +19,8 @@ const Drawer = createDrawerNavigator(
   {
     Home: { screen: Home },
     Channels: { screen: Channels },
-    Overview: { screen: Overview },
     Calendar: { screen: Calendar },
     Collectes: { screen: Collectes },
-    Profile: { screen: Profile },
     Settings: { screen: Settings },
     Ecocentre: {screen: Ecocentre},
     MapScreen: {screen: MapScreen}
