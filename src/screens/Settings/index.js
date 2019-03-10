@@ -103,7 +103,7 @@ class Settings extends Component {
                   }
                 >
                   <Switch
-                    onValueChange={value => this.setState({ monSwitch: value })}
+                    onValueChange={value => this.setState({ dechetSwitch: value })}
                     onTintColor={light}
                     style={styles.switch}
                     thumbTintColor={primary}
@@ -132,7 +132,7 @@ class Settings extends Component {
                   }
                 >
                   <Switch
-                    onValueChange={value => this.setState({ tueSwitch: value })}
+                    onValueChange={value => this.setState({ recyclageSwitch: value })}
                     onTintColor={light}
                     style={styles.switch}
                     thumbTintColor={primary}
@@ -161,7 +161,7 @@ class Settings extends Component {
                   }
                 >
                   <Switch
-                    onValueChange={value => this.setState({ wedSwitch: value })}
+                    onValueChange={value => this.setState({ residusVertSwitch: value })}
                     onTintColor={light}
                     style={styles.switch}
                     thumbTintColor={primary}
