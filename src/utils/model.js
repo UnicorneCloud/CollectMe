@@ -69,7 +69,7 @@ export const getAllGeometriesMock = (location) => {
   return geometries
 }
 
-export const getCollectScheduleData = (location = {latitude: 46.8784799, longitude: -71.348191}) => {
+export const getCollectScheduleData = (location = { latitude: 46.8784799, longitude: -71.348191 }) => {
   const locationPoint = { type: 'Point', coordinates: [location.longitude, location.latitude] };
   const collectScheduleDataByType = [
     [COLLECT_TYPES.GARBAGE, require('../../data/dechets.json')],
