@@ -86,66 +86,18 @@ class Settings extends Component {
           <View>
             <Text style={styles.signupHeader}>SETTINGS</Text>
             <View style={styles.profileButtons}>
-              <Button transparent style={styles.roundedButton}>
-                <Icon
-                  name="cloud-upload"
-                  style={
-                    Platform.OS === "android"
-                      ? { color: "#FFF", width: 23 }
-                      : { color: "#FFF", width: 22 }
-                  }
-                />
-              </Button>
               <TouchableOpacity style={{ alignSelf: "center" }}>
                 <Thumbnail
                   source={require("../../../assets/DefaultIcon.png")}
                   style={styles.profilePic}
                 />
               </TouchableOpacity>
-              <Button transparent style={styles.roundedButton}>
-                <Icon
-                  name="cloud-download"
-                  style={
-                    Platform.OS === "android"
-                      ? { color: "#FFF", width: 23 }
-                      : { lineHeight: 0, color: "#FFF", width: 22 }
-                  }
-                />
-              </Button>
             </View>
           </View>
 
-          <View style={styles.bg}>
-            <View style={styles.signupContainer}>
-              <Item rounded style={styles.inputGrp}>
-                <Icon name="ios-person-outline" />
-                <Input
-                  placeholder="Username"
-                  placeholderTextColor="rgba(255,255,255,0.6)"
-                  style={styles.input}
-                />
-              </Item>
-              <Item rounded style={styles.inputGrp}>
-                <Icon name="ios-mail-open-outline" />
-                <Input
-                  placeholder="Email"
-                  placeholderTextColor="rgba(255,255,255,0.6)"
-                  style={styles.input}
-                />
-              </Item>
-              <Item rounded style={styles.inputGrp}>
-                <Icon name="ios-unlock-outline" />
-                <Input
-                  placeholder="Password"
-                  placeholderTextColor="rgba(255,255,255,0.6)"
-                  secureTextEntry
-                  style={styles.input}
-                />
-              </Item>
-            </View>
-          </View>
+
           <View style={styles.notificationSwitchContainer}>
-            <Text style={styles.notificationHeader}>EMAIL NOTIFICATIONS</Text>
+            <Text style={styles.notificationHeader}>NOTIFICATIONS DE COLLECTES</Text>
             <View>
               <Grid style={styles.child}>
                 <Col>
@@ -156,7 +108,7 @@ class Settings extends Component {
                         : styles.switchText
                     }
                   >
-                    Monday
+                    Collectes de déchets
                   </Text>
                 </Col>
                 <Col
@@ -185,7 +137,7 @@ class Settings extends Component {
                         : styles.switchText
                     }
                   >
-                    Tuesday
+                    Collectes du recyclage
                   </Text>
                 </Col>
                 <Col
@@ -214,7 +166,7 @@ class Settings extends Component {
                         : styles.switchText
                     }
                   >
-                    Wednesday
+                    Collectes de résidus verts
                   </Text>
                 </Col>
                 <Col
@@ -231,122 +183,6 @@ class Settings extends Component {
                     thumbTintColor={primary}
                     tintColor={primary}
                     value={this.state.wedSwitch}
-                  />
-                </Col>
-              </Grid>
-              <Grid style={styles.child}>
-                <Col>
-                  <Text
-                    style={
-                      Platform.OS === "android"
-                        ? styles.aswitchText
-                        : styles.switchText
-                    }
-                  >
-                    Thursday
-                  </Text>
-                </Col>
-                <Col
-                  style={
-                    Platform.OS === "android"
-                      ? styles.aswitchContainer
-                      : styles.switchContainer
-                  }
-                >
-                  <Switch
-                    onValueChange={value => this.setState({ thuSwitch: value })}
-                    onTintColor={light}
-                    style={styles.switch}
-                    thumbTintColor={primary}
-                    tintColor={primary}
-                    value={this.state.thuSwitch}
-                  />
-                </Col>
-              </Grid>
-              <Grid style={styles.child}>
-                <Col>
-                  <Text
-                    style={
-                      Platform.OS === "android"
-                        ? styles.aswitchText
-                        : styles.switchText
-                    }
-                  >
-                    Friday
-                  </Text>
-                </Col>
-                <Col
-                  style={
-                    Platform.OS === "android"
-                      ? styles.aswitchContainer
-                      : styles.switchContainer
-                  }
-                >
-                  <Switch
-                    onValueChange={value => this.setState({ friSwitch: value })}
-                    onTintColor={light}
-                    style={styles.switch}
-                    thumbTintColor={primary}
-                    tintColor={primary}
-                    value={this.state.friSwitch}
-                  />
-                </Col>
-              </Grid>
-              <Grid style={styles.child}>
-                <Col>
-                  <Text
-                    style={
-                      Platform.OS === "android"
-                        ? styles.aswitchText
-                        : styles.switchText
-                    }
-                  >
-                    Saturday
-                  </Text>
-                </Col>
-                <Col
-                  style={
-                    Platform.OS === "android"
-                      ? styles.aswitchContainer
-                      : styles.switchContainer
-                  }
-                >
-                  <Switch
-                    onValueChange={value => this.setState({ satSwitch: value })}
-                    onTintColor={light}
-                    style={styles.switch}
-                    thumbTintColor={primary}
-                    tintColor={primary}
-                    value={this.state.satSwitch}
-                  />
-                </Col>
-              </Grid>
-              <Grid style={styles.child}>
-                <Col>
-                  <Text
-                    style={
-                      Platform.OS === "android"
-                        ? styles.aswitchText
-                        : styles.switchText
-                    }
-                  >
-                    Sunday
-                  </Text>
-                </Col>
-                <Col
-                  style={
-                    Platform.OS === "android"
-                      ? styles.aswitchContainer
-                      : styles.switchContainer
-                  }
-                >
-                  <Switch
-                    onValueChange={value => this.setState({ sunSwitch: value })}
-                    onTintColor={light}
-                    style={styles.switch}
-                    thumbTintColor={primary}
-                    tintColor={primary}
-                    value={this.state.sunSwitch}
                   />
                 </Col>
               </Grid>

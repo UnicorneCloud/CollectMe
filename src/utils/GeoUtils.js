@@ -3,6 +3,9 @@ const entities = new Entities();
 import { WEEK_DAYS_MAP, COLLECT_PERIOD_IN_DATA, WEEK_DAYS_IN_DATA, createFrequence } from "./model";
 
 export const getFrequence = (feature) => {
+  console.log("===================================");
+  console.log("freqqq", feature.properties);
+
   const collectDays = feature.properties.JOUR_COLLECTE;
   const startDate = new Date(feature.properties.DATE_DEBUT);
   const endDate = feature.properties.DATE_FIN ? new Date(feature.properties.DATE_FIN) : null;
@@ -47,22 +50,22 @@ export const getPeriod = (aString) => {
   }
 };
 
-export const distanceBetweenCoordinates = (a,b) => {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(b[1]-a[1]);  // deg2rad below
-    var dLon = deg2rad(b[0]-b[0]); 
-    var c = 
-      Math.sin(dLat/2) * Math.sin(dLat/2) +
-      Math.cos(deg2rad(a[1])) * Math.cos(deg2rad(b[1])) * 
-      Math.sin(dLon/2) * Math.sin(dLon/2)
-      ; 
-    var d = 2 * Math.atan2(Math.sqrt(c), Math.sqrt(1-c)); 
-    var distance = R * d; // Distance in km
-    return distance;
+export const distanceBetweenCoordinates = (a, b) => {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(b[1] - a[1]);  // deg2rad below
+  var dLon = deg2rad(b[0] - b[0]);
+  var c =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(a[1])) * Math.cos(deg2rad(b[1])) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2)
+    ;
+  var d = 2 * Math.atan2(Math.sqrt(c), Math.sqrt(1 - c));
+  var distance = R * d; // Distance in km
+  return distance;
 }
 
 const deg2rad = (deg) => {
-  return deg * (Math.PI/180)
+  return deg * (Math.PI / 180)
 }
 
 export const ecocenterMarkers = (ecocenters) => {
